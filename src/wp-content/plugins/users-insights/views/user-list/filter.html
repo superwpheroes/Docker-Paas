@@ -1,0 +1,55 @@
+<div class="usin-filter-wrap">
+		<button class="usin-btn usin-btn-main usin-btn-filter" ng-click="addFilter()" ng-class="{'usin-btn-disabled': loading.isLoading()}">
+			<span class="usin-icon-filter usin-icon-left" /> {{strings.addFilter}}
+		</button>
+		<div class="usin-filter-set" ng-repeat="(key, filter) in filters">
+	
+			<div ng-if="filter.editing" class="usin-filter-form" ng-class="{'usin-filter-form-combined': filter.type == 'combined'}">
+				<usin-select-field ng-model="filter.by" options="fields" option-key="id" option-val="name" 
+					ng-change="doOnFieldSelected(key, filter)" class="usin-field-select usin-filter-by-select"></usin-select-field>
+				<span ng-if="filter.type" ng-keyup="$event.keyCode==13 && applyFilter(filter)">
+	
+					<span ng-if="filter.type!='combined'">
+						<usin-select-field ng-model="filter.operator" options="filter.operators" ng-hide="filter.operators.length<=1" class="usin-operator-select"></usin-select-field>
+						<span ng-if="filter.isOptionType()">
+							<!-- filter a select field -->
+							<usin-select-field ng-model="filter.condition" options="filter.options" search-action="filter.searchAction"
+								ng-hide="filter.isNullOperator()" class="usin-condition-select"></usin-select-field>
+						</span>
+						
+						<span ng-if="filter.isDateType()">
+							<!-- filter by date -->
+							<span usin-date-filter condition="filter.condition" operator="filter.operator" by="filter.by"
+								ng-hide="filter.isNullOperator()"></span>
+						</span>
+	
+						<span ng-if="filter.type=='number'">
+							<!-- filter by number -->
+							<input type="number" ng-model="filter.condition" ng-hide="filter.isNullOperator()">
+						</span>
+	
+						<span ng-if="filter.isTextField()">
+							<!-- filter by text -->
+							<input type="text" ng-model="filter.condition" ng-hide="filter.isNullOperator()">
+						</span>
+					</span>
+					<usin-filter-combined ng-if="filter.type=='combined'" items="filter.field.filter.items" condition="filter.condition" class="usin-combined-filter-items"></usin-filter-combined>
+				</span>
+				<span class="usin-filter-actions">
+					<button ng-show="filter.type" class="usin-btn usin-btn-main usin-btn-apply usin-icon-apply" ng-click="applyFilter(filter)" ></button>
+					<span class="usin-btn-close usin-icon-close" ng-click="remove(filter)" />
+				</span>
+			</div>
+			
+			<div ng-if="!filter.editing" class="usin-filter-preview usin-btn" ng-class="{'usin-disabled': filter.disabled, 'usin-filter-preview-combined': filter.type == 'combined'}">
+				<md-tooltip md-direction="top" ng-if="filter.disabled">{{strings.fieldNotExist}}</md-tooltip>
+				<span class="usin-filter-preview-text" ng-click="edit(filter)">
+					<span class="usin-filter-preview-label">{{filter.label}}</span> <span class="usin-filter-operator">{{filter.previewOperator()}}</span> <span ng-class="{'usin-filter-preview-combined-items':filter.type=='combined'}" ng-bind-html="filter.previewCondition()"></span>
+				</span>
+				<span class="usin-btn-close usin-icon-close" ng-click="remove(filter)" ng-class="{'usin-btn-disabled': loading.isLoading()}" />
+			</div>
+		</div>
+	
+		<span ng-show="filters.length>1 && !filtersPending()" class="usin-btn-text" ng-click="clearAll()">{{strings.clearAll}}</span>
+	
+	</div>

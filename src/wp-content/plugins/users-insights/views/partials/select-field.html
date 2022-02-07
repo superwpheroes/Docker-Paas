@@ -1,0 +1,9 @@
+<span>
+		<ui-select usin-select-focus-input search-enabled="searchEnabled" theme="select2" ng-class="{'usin-select-loading':loading}">
+			<ui-select-match placeholder="{{placeholder}}">{{$select.selected[optionVal]}}</ui-select-match>
+			<ui-select-choices ui-disable-choice="shouldDisableChoice(field)" refresh="searchOptions($select)" refresh-delay="300" repeat="field[optionKey] as field in options | filter: $select.search" position="down">
+				<span ng-if="field.icon" class="usin-icon-{{field.icon}}"></span>
+				  <span ng-bind-html="field[optionVal] | highlight: $select.search"></span>
+			</ui-select-choices>
+		</ui-select>
+	</span>

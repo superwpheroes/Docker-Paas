@@ -1,0 +1,33 @@
+<md-dialog aria-label="{{title}}">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{title}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="closeDialog()">
+				<md-icon class="usin-icon-delete" aria-label="{{strings.close}}"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content>
+		<div class="md-dialog-content">
+			<div class="usin-error" ng-if="error">{{error.msg}}</div>
+			<div class="usin-icon-simple-loading" ng-show="loading"></div>
+			<div ng-if="items.length">
+				<table class="usin-table usin-profile-activity-table">
+					<thead>
+						<tr>
+							<th ng-repeat="prop in itemProps">{{prop}}</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="item in items">
+						<td ng-repeat="(key, prop) in itemProps">
+							<a ng-if="key=='title' && item.link" ng-href="{{item.link}}" target="_blank">{{item[key]}}</a>
+							<span ng-if="!(key=='title' && item.link)">{{item[key]}}</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

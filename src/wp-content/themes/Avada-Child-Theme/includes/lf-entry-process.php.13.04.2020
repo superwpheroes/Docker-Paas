@@ -1,0 +1,1874 @@
+<?php
+
+/* Redirect entrant-registration to my-lf-entrant - if user logged in */
+/* Redirect entrant-registration to my-lf-entrant - if user logged in */
+/* OR Redirect member-registration-2 to my-lf-member - if user logged in */
+add_action('template_redirect','redirect_entrant_registration');
+
+function redirect_entrant_registration(){
+	global $post;
+    $slug = $post->post_name;
+	$current_user = wp_get_current_user();
+	if ($current_user->ID ) {
+		if($slug=='entrant-registration'){
+			wp_redirect(get_bloginfo('url').'/my-lf-entrant');
+		}
+		else if($slug=='membership-registration-2'){
+			wp_redirect(get_bloginfo('url').'/my-lf-member');
+		}
+	}
+}
+
+function get_active_LF_theme_entrant(){
+    global $wpdb;
+    $current_time = current_time('mysql');
+
+    $theme_entrant = $wpdb->get_row("
+    	SELECT * FROM {$wpdb->prefix}lf_themes 
+    	WHERE start < '$current_time' 
+    	AND end > '$current_time' and deleted = false LIMIT 1");
+
+    return $theme_entrant;
+}
+
+function get_active_LF_entries_entrant(){
+    global $wpdb;
+    // $first_day_month = date('Y-m-01');
+ 	$current_time = current_time('mysql');
+
+    $entries_entrant = $wpdb->get_results("
+    	SELECT * FROM {$wpdb->prefix}lf_theme_entries 
+    	WHERE  end_entrants > '$current_time' 
+    	and deleted = false ");
+
+    // echo '<pre>'.print_r($entries_entrant,1).'</pre>';
+    // die();
+    
+    return $entries_entrant;
+}
+
+
+function get_active_LF_themes_member(){
+    global $wpdb;
+    // $first_day_month = date('Y-m-01');
+ 	$current_time = current_time('mysql');
+
+    $themes_member = $wpdb->get_row("
+    	SELECT * FROM {$wpdb->prefix}lf_themes 
+    	WHERE  end > '$current_time' 
+    	and deleted = false  LIMIT 1
+    	");
+    
+    return $themes_member;
+}
+
+function get_active_LF_entries_member(){
+    global $wpdb;
+    // $first_day_month = date('Y-m-01');
+ 	$current_time = current_time('mysql');
+
+    $entries_member = $wpdb->get_results("
+    	SELECT * FROM {$wpdb->prefix}lf_theme_entries 
+    	WHERE  end_members > '$current_time' 
+    	and deleted = false ");
+    
+    return $entries_member;
+}
+
+function get_active_LF_entries(){
+    global $wpdb;
+    // $first_day_month = date('Y-m-01');
+ 	$current_time = current_time('mysql');
+
+ 	$entries_member = array();
+
+    $lf_themes = $wpdb->get_row("
+		    	SELECT * FROM {$wpdb->prefix}lf_themes 
+		    	WHERE start <= '$current_time' 
+		    	AND deleted = false 
+		    	ORDER BY start DESC
+		    	LIMIT 1 ", ARRAY_A);
+
+    if(!empty($lf_themes)){
+    	$theme_id = $lf_themes['id'];
+		$entries_member = $wpdb->get_results(
+				"SELECT * 
+			    FROM {$wpdb->prefix}lf_theme_entries
+			    WHERE theme_id = '$theme_id'
+			    ORDER BY id ASC ");
+    }
+
+    return $entries_member;
+}
+
+
+
+
+
+function get_images_left_to_submit($user_email,$user_login,$user_type='',$start_date){
+ 	global $wpdb;
+
+	/* Get total numbers of images available get_images_left_to_submite from payments */
+ 	// $start_date = date('Y-m-01 00:00:00');
+ 	$end_date = date('Y-m-d H:i:s', strtotime('now'));
+    $payments = $wpdb->get_results("
+    	SELECT * FROM {$wpdb->prefix}lf_payments 
+    	WHERE email_address = '$user_email' 
+    	AND date BETWEEN '{$start_date}' 
+    	AND '{$end_date}'", 
+    	ARRAY_A);
+
+	// // Print last SQL query string
+	// echo $wpdb->last_query;
+	// // Print last SQL query result
+	// echo '<pre>'.print_r($wpdb->last_result,1).'</pre>';
+	// // Print last SQL query Error
+	// echo $wpdb->last_error;
+
+    $total_payment_images = 0;
+    if($payments){
+    	foreach($payments as $payment){
+    		switch($payment['description']){
+    			case 'Life-Framer - 1 entry':
+    				$total_payment_images++;
+    				break;
+				case 'Life-Framer - 3 entries';
+					$total_payment_images = $total_payment_images+3;
+					break;
+				case 'Life-Framer - 6 entries':
+					$total_payment_images = $total_payment_images+6;
+					break;
+				default :
+    		}
+    	}
+    }
+
+	/* Get already uploaded images */
+
+	$str_to_time_Startdate = strtotime($start_date);
+	$str_to_time_Enddate = strtotime($end_date);
+
+    $uploaded_images = $wpdb->get_var("
+    	SELECT SUM(no_images) FROM {$wpdb->prefix}lf_entry 
+    	WHERE wp_user = '$user_login' 
+    	AND role = '$user_type'
+    	AND date_time >= '{$str_to_time_Startdate}' 
+    	AND  date_time <= '{$str_to_time_Enddate}'"
+    );
+
+    	// Print last SQL query string
+	// echo $wpdb->last_query;
+	// // Print last SQL query result
+	// echo '<pre>'.print_r($wpdb->last_result,1).'</pre>';
+	// // Print last SQL query Error
+	// echo $wpdb->last_error;
+
+
+    $total_images = $total_payment_images - $uploaded_images;
+    return $total_images;
+}
+
+
+
+function get_amount_payment_ref($user_email){
+	global $wpdb;
+	$start_date = date('Y-m-01 00:00:00');
+ 	$end_date = date('Y-m-d H:i:s', strtotime('now'));
+    // $payments = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}lf_payments WHERE email_address = '$user_email' AND date BETWEEN '{$start_date}' AND '{$end_date}' ORDER BY date DESC", ARRAY_A);    
+
+    $payments = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}lf_payments WHERE email_address = '$user_email' ORDER BY date DESC", ARRAY_A);
+    return $payments;
+}
+
+
+function lf_enqueue_scripts() {
+	/* If page = submit-*** remove initial dropzone script and add the new one */
+	if(is_page('submit-entrant')|| is_page('submit-member') || is_page('submit-past')){
+	    wp_enqueue_style( 'dropzone-css', get_stylesheet_directory_uri().'/assets/css/dropzone.css' );
+	 	wp_deregister_script( 'um_gallery' );
+	    
+	    wp_enqueue_script( 'dropzone-js', get_stylesheet_directory_uri().'/assets/js/dropzone.js', true );
+       
+        wp_enqueue_script('submit-handle-uploads', get_stylesheet_directory_uri().'/assets/js/submit-handle-uploads.js', array(), false, true);
+        wp_localize_script( 'submit-handle-uploads', 'my_ajax_object',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
+        wp_localize_script( 'submit-handle-uploads', 'um_gallery_config',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'lf_enqueue_scripts' );
+
+
+function lf_admin_enqueue_scripts($hook) {
+    wp_enqueue_script( 'custom-admin-js',get_stylesheet_directory_uri().'/assets/js/admin-js.js', array('jquery'), null, true);
+    wp_enqueue_style( 'custom-admin-css', get_stylesheet_directory_uri().'/assets/css/admin-css.css' );
+}
+add_action( 'admin_enqueue_scripts', 'lf_admin_enqueue_scripts' );
+
+
+function multiexplode ($delimiters,$string) {
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
+}
+
+function submit_images_fc($atts = [], $content = null) {
+	$atts = shortcode_atts( array(
+	    'type' => '',
+	), $atts);
+
+
+
+	global $ultimatemember;
+	global $wpdb;
+	ob_start();
+	// echo $atts['type'];
+	$current_user = wp_get_current_user();
+	$user_email = $current_user->user_email;
+	$user_login = $current_user->user_login;
+	$current_user_ID = $current_user->ID;
+		
+	/* Get user role */ 
+	um_fetch_user( $current_user_ID );
+	$user_role = $ultimatemember->user->get_role();
+	?>
+
+	<div class="submit-images submit-images-<?php echo $user_role;?>">
+
+	<?php
+
+	/* ENTRANT role */
+	if($user_role=='entrant'){ 
+		?>
+
+
+		<?php
+
+		/* Get current themes */
+		$get_active_LF_entries_entrant = get_active_LF_entries();
+
+		// echo '<pre>'.print_r($get_active_LF_entries_entrant,1).'</pre>';
+
+
+		/* In case the user still has images to submit show the form */
+		/* And there are open themes */
+
+		if(!empty($get_active_LF_entries_entrant)){
+
+			$theme_start_date = $get_active_LF_entries_entrant[0]->start;
+			/* Get images to submit */
+			$images_to_submit = get_images_left_to_submit($user_email,$user_login,$user_role,$theme_start_date);
+
+			$extra_images_to_submit = get_user_meta($current_user_ID,'extra_entry_imgs',true);
+
+			$images_to_submit = $images_to_submit + $extra_images_to_submit;
+
+
+			// if($entries_entrant){
+				if($images_to_submit>0 /*&& $payment_month */ ){
+					?>
+					<div class="submit-images-intro">
+						<h3> Submit Images </h3>
+						<?php
+							$theme_end_date = $get_active_LF_entries_entrant[0]->end_entrants;
+							$deadline = date('jS \of F', strtotime($theme_end_date));
+						?>
+						<p class="/*entrant*/">You have 
+							<span id="images-to-submit"><?php echo $images_to_submit;?></span> 
+							images left to submit<!--<br>--> before the <?php echo $deadline;?>. 
+						</p>
+					</div><!--end submit-images-intro-->
+
+	
+				<?php
+					echo '<div class="submit-info">
+							<p>Please drag your images into the upload boxes, and add any text you wish to include in the description box. There is no need to name your files in a particular format.</p>
+							<p>Once you\'re ready, press \'Submit\' at the bottom. Review your entries carefully before submission – you will not have an opportunity to edit them afterwards.</p>
+							</div>';
+
+					echo '<input type="hidden" value="'. $images_to_submit .'" id="img_to_submit">';
+					echo '<input type="hidden" value="'. $current_user->user_login .'" id="user_login">';
+					echo '<input type="hidden" value="'. $current_user->first_name .' '.$current_user->last_name .'" id="user_fname_lname">';
+					echo '<input type="hidden" value="'. $current_user->user_email .'" id="user_email">';
+					echo '<input type="hidden" value="'. $current_user_ID .'" id="user_id">';
+					echo '<input type="hidden" value="'. $user_role .'" id="user_role">';
+
+					echo '<input type="hidden" name="submitimages-ajax-nonce" id="submitimages-ajax-nonce" value="' . wp_create_nonce( 'submitimages-ajax-nonce' ) . '" />';
+
+				
+				/* Unset Session last entry id */
+				unset($_SESSION['last_entry']);
+				
+				if (!session_id())
+						session_start();
+
+				$_SESSION['success_uploaded']='0';
+
+				/* Get split theme names */
+				foreach($get_active_LF_entries_entrant as $key=> $entry){ 
+
+
+					$_SESSION['key-'.$key]='0';
+
+					?>
+					<input type="hidden" id="<?php echo 'key-'.$key;?>" value="0">
+					<div class="submit-theme-photos sss" >
+						<label>
+							<?php echo 'Upload images for \''.trim($entry->name).'\'';?>
+							<?php echo ' - Deadline: '.date('dS \of F',strtotime($entry->end_entrants));?>
+						</label>
+						<div class="upload-form upload-form-entrant" id="form-<?php echo $key;?>" 
+							data-box="<?php echo 'key-'.$key;?>" 
+							data-entry_item="<?php echo trim($entry->name);?>" 
+							date-time="<?php echo strtotime('now');?>"
+							data-current_theme="<?php echo $entry->theme_id;?>"
+							data-current_entry_theme="<?php echo $entry->id;?>"
+							>
+							<div class="dz-message">
+								<span>
+									<span class="icon"><i class="um-faicon-picture-o"></i></span>
+									<span class="str">Upload your photos (max 6MB/photo)</span>
+								</span>
+							</div>
+						</div>
+					</div>	<!-- END submit-theme-photos-->
+
+					<?php
+					// break;
+				}?>
+
+				<label for="submit-images-description" class="submit-description">Description (optional)</label>
+				<textarea id="submit-images-description" placeholder="Tell us about your image(s) or series (we share our favourites on our Instagram, with the hashtag #lifeframerstories)"></textarea>
+
+				<div class="submit-images-holder">
+					<button class="dz-submit-images">
+						<span class="submit">Submit</span>
+						<i class="fa fa-spinner fa-spin"></i>
+					</button>
+				</div>
+
+			</div>
+			
+				<?php
+
+			}
+				else{ 
+					?>
+					<script type="text/javascript">
+					jQuery(document).ready(function ($) {
+						$(".enter-award-again").css('display','block');
+					});
+					</script>
+				<?php
+				}
+			// }
+		}
+		else{
+			echo '<h4 class="text-center">There are no open themes at the moment!</h4>';
+		}
+
+
+
+	}
+	/* END ENTRANT role */
+
+	else if($user_role=='member'){
+	?>
+
+
+	<?php
+	// $member_theme = get_active_LF_themes_member();
+	$member_entries = get_active_LF_entries();
+
+
+	if($member_entries){
+
+		echo '<div class="submit-images-intro">
+			<h3> Submit Images </h3>
+			<p>You can submit up to 10 images per theme.
+			Submitting more than this will disqualify your entry.</p>
+		</div>';
+
+
+		echo '<div class="submit-info">
+			<p>Please drag your images into the upload boxes, and add any text you wish to include in the description box. There is no need to name your files in a particular format.</p>
+			<p>Once you\'re ready, press \'Submit\' at the bottom. Review your entries carefully before submission – you will not have an opportunity to edit them afterwards.</p></div>';
+
+		echo '<input type="hidden" value="'. $current_user->user_login .'" id="user_login">';
+		echo '<input type="hidden" value="'. $current_user->first_name .' '.$current_user->last_name .'" id="user_fname_lname">';
+		echo '<input type="hidden" value="'. $current_user->user_email .'" id="user_email">';
+		echo '<input type="hidden" value="'. $user_role .'" id="user_role">';
+
+		echo '<input type="hidden" name="submitimages-ajax-nonce" id="submitimages-ajax-nonce" value="' . wp_create_nonce( 'submitimages-ajax-nonce' ) . '" />';
+
+		/* Unset Session last entry id */
+		unset($_SESSION['last_entry']);
+		$key = 0;
+
+		if (!session_id())
+			session_start();
+		$_SESSION['success_uploaded']='0';
+
+		foreach($member_entries as $key => $member_entry){
+			$theme_name_member = $member_entry->name;
+			$theme_id_member = $member_entry->theme_id;
+
+					$_SESSION['key-'.$key] ='0';
+
+					?>
+					<input type="hidden" id="<?php echo 'key-'.$key;?>" value="0">
+					<div class="submit-theme-photos " >
+						<label>
+							<?php echo 'Upload images for \''.trim($theme_name_member).'\'';?>
+							<?php echo ' - Deadline: '.date('dS \of F',strtotime($member_entry->end_members));?>
+						</label>
+						<div class="upload-form upload-form-member" id="form-<?php echo $key;?>" 
+							data-box="<?php echo 'key-'.$key;?>" 
+							data-entry_item="<?php echo trim($theme_name_member);?>" 
+							date-time="<?php echo strtotime('now');?>"
+							data-current_theme="<?php echo $theme_id_member;?>"
+							data-current_entry_theme="<?php echo $member_entry->id;?>"
+							>
+							<div class="dz-message">
+								<span>
+									<span class="icon"><i class="um-faicon-picture-o"></i></span>
+									<span class="str">Upload your photos (max 6MB/photo)</span>
+								</span>
+							</div>
+						</div>
+					</div>	
+
+		<?php
+			}
+		?>
+
+		<label for="submit-images-description" class="submit-description">Description (optional)</label>
+		<textarea id="submit-images-description" placeholder="Tell us about your image(s) or series (we share our favourites on our Instagram, with the hashtag #lifeframerstories)"></textarea>
+
+
+		<div class="submit-images-holder">
+			<button class="dz-submit-images"><span class="submit">Submit</span><i class="fa fa-spinner fa-spin" ></i></button>
+		</div>
+
+		<?php
+
+	}
+	else{
+		echo '<h4 class="text-center">There are no open themes at the moment!</h4>';
+	}
+
+			?>
+
+	</div>
+
+	<?php
+	}
+
+	echo do_shortcode('[past_uploads role="'.$user_role.'"]');
+
+	return ob_get_clean();
+}
+
+add_shortcode('submit_images','submit_images_fc');
+
+
+function past_uploads_fs($atts = [], $content = null) {
+    $atts = shortcode_atts( array(
+        'role' => '',
+    ), $atts);
+	ob_start();
+
+	/* Past submitions functionality */
+	global $wpdb;
+	$current_user = wp_get_current_user();
+
+
+
+	$images_subbmitted = $wpdb->get_results(
+	"SELECT 
+	lf_entry.time,
+	lf_entry.theme_id,
+	lf_photos.path,
+	lf_photos.theme_entry_id
+    FROM {$wpdb->prefix}lf_entry AS lf_entry
+    INNER JOIN {$wpdb->prefix}lf_photos AS lf_photos
+    ON lf_photos.entry_id =  lf_entry.id 
+    WHERE lf_entry.wp_user='$current_user->user_login' 
+    and lf_entry.date_time>0 ORDER BY lf_entry.time DESC", ARRAY_A);
+    
+
+	// Obtain a list of columns
+	foreach ($images_subbmitted as $key => $row) {
+	    $date[$key]  = $row['time'];
+	    $theme_entry_id[$key] = $row['theme_entry_id'];
+	}
+	// _pre($images_subbmitted);
+    if($images_subbmitted){
+
+		// Sort the data with date descending, theme id ascending
+		// Add $data as the last parameter, to sort by the common key
+		array_multisort($date, SORT_DESC, $theme_entry_id, SORT_ASC, $images_subbmitted);
+
+		$upload_dir = wp_upload_dir();
+		$upload_baseurl = $upload_dir['baseurl'];
+		$upload_basedir = $upload_dir['basedir'];
+
+    	echo '<div class="images-submitted images-submitted-'.$atts['role'].'">';
+		echo '<h3>MY PAST UPLOADS</h3>';
+		$date = '';
+		foreach ($images_subbmitted as $key => $result) {
+			// echo '<pre>'.print_r($result).'</pre>';
+
+			if($date != $result['time']){
+				$submittion_date = date('d M Y',strtotime($result['time']));
+				if($key!='0')
+					{
+						echo '<div class="clearfix"></div>';
+						echo '</div><!--end 1 -->';
+						echo '</div><!--end 2 -->';
+					}
+
+				echo '<div class="submittion-items">';
+				echo '<span>- '.$submittion_date.'</span>';
+				echo '<div class="submittion-images">';
+			}
+
+
+			$theme_entry_id = $result['theme_entry_id'];
+
+			if(file_exists($upload_basedir.''.$result['path'])){
+				$get_image = wp_get_image_editor( $upload_basedir.''.$result['path']);
+				$square_img_class = '';
+				if ( ! is_wp_error( $get_image ) ) {
+					$get_image_size = $get_image->get_size();
+					if($get_image_size['width'] == $get_image_size['height']){
+						$square_img_class = 'square-img';
+					}
+
+				}
+				echo '<div class="submittion-image">';
+				echo '<div class="submittion-image-holder">';
+				echo '<img src="'.$upload_baseurl.''.$result['path'].'" class="'.$square_img_class.'">';
+				
+
+				$image_path = $result['path'];
+				$image_path_array = explode('/',$image_path);
+
+				$image_name = $image_path_array[count($image_path_array)-1];
+				$image_name_array = explode('-',$image_name);
+
+				$theme_name = $image_name_array['1'];
+				$theme_name = preg_replace('/[0-9]+/', '', $theme_name);
+				
+
+				$theme_entry_name = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}lf_theme_entries WHERE  id = '$theme_entry_id'" );
+				
+				// echo '<span class="entry_title">' .$theme_entry_name->name. '</span>';
+				echo '<span class="entry_title">' .$theme_name. '</span>';
+				echo '</div><!--end submision image holder-->';
+				echo '</div><!--end submision image-->';
+			}
+			$date = $result['time'];
+		}
+		echo '<div class="clearfix"></div>';
+		echo '</div><!--end 1 -->';
+		echo '</div><!--end 2 -->';
+
+		echo '</div>';
+		echo '</div>';
+    }
+
+
+	return ob_get_clean();
+}
+
+add_shortcode('past_uploads','past_uploads_fs');
+
+
+
+if(isset($_GET['submit_upload']) && ($_GET['submit_upload'])=='true'){
+	add_action('template_redirect','submit_upload');
+}
+
+function insert_lf_photo($entry_id,$path,$theme_id,$theme_entry_id){
+	global $wpdb;
+	$wpdb->insert( 
+		"{$wpdb->prefix}lf_photos", 
+			array( 
+				'entry_id' => $entry_id, 
+				'path' => $path,
+				'theme_id' => $theme_id,
+				'theme_entry_id' => $theme_entry_id
+			), 
+			array( 
+				'%d', 
+				'%s',
+				'%d',
+				'%d'
+			) 
+		);
+}
+
+
+function update_lf_entry($entry_id){
+	global $wpdb;
+	$wpdb->query( $wpdb->prepare("UPDATE {$wpdb->prefix}lf_entry
+					              SET no_images = no_images + 1
+					              WHERE id = %d", $entry_id)
+	    );
+}
+
+function update_lf_entry_extra_credits($entry_id){
+	global $wpdb;
+	$wpdb->query( $wpdb->prepare("UPDATE {$wpdb->prefix}lf_entry
+	               				  SET no_img_extra = no_img_extra + 1
+	             				  WHERE id = %d", $entry_id)
+	    );
+}
+
+function submit_upload(){ 
+ 	global $wpdb;
+
+	$submit_response = array();
+
+	/* Insert new entry to _lf_entry if is not inserted yet */
+	$date_time = $_GET['date_time'];
+	$user_login = $_GET['user_login'];
+	$user_fname_lname = stripslashes($_GET['user_fname_lname']);
+	$user_email = $_GET['user_email'];
+	$role =  $_GET['user_role'];
+
+	$current_theme = $_GET['current_theme'];
+	$current_entry_theme = $_GET['current_entry_theme'];
+	$theme_id = $_GET['theme_id'];
+	$entry_item = $_GET['entry_item'];
+	$entry_desc = strip_tags(trim($_GET['entry_desc']));
+	
+
+	$entry = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}lf_entry WHERE  wp_user = '$user_login' AND date_time = '$date_time' AND theme_id = '$current_theme' " );
+
+
+	// // Print last SQL query string
+	// echo $wpdb->last_query;
+	// // Print last SQL query result
+	// echo '<pre>'.print_r($wpdb->last_result,1).'</pre>';
+	// // Print last SQL query Error
+	// echo $wpdb->last_error;
+
+	// die();
+
+	if(empty($entry)){
+		/* Insern new entry in lf_entry table */
+		$payment_info = get_amount_payment_ref($user_email);
+
+		$amount = $payment_ref = '';
+		if($payment_info){
+			$amount = $payment_info['amount'];
+			$payment_ref = $payment_info['payment_ref'];
+		}
+		$wpdb->insert( 
+		"{$wpdb->prefix}lf_entry", 
+			array( 
+				'time' => date('Y-m-d'), 
+				'date_time' => $date_time,
+				'name' => ucwords($user_fname_lname),
+				'wp_user' => $user_login,
+				'email_address' => $user_email,
+				'theme_id' => $current_theme,
+				'payment' => $amount,
+				'payment_reference' => $payment_ref,
+				'role'=> $role,
+				'additional_information' => $entry_desc
+
+			), 
+			array( 
+				'%s', 
+				'%s' ,
+				'%s' ,
+				'%s' ,
+				'%s' ,
+				'%d' ,
+				'%d' ,
+				'%s' ,
+				'%s' ,
+				'%s' 
+			) 
+		);
+		$last_id = $wpdb->insert_id;
+
+		$_SESSION['last_entry'] = $last_id;
+	}
+
+	
+
+	if( !empty($_FILES) && ($_FILES['img-submit']['error']=='0') && isset($_SESSION['last_entry'] )){
+	// echo '<pre>'.print_r($_FILES,1).'</pre>';
+		/* Create photo name */
+		$_SESSION[$theme_id] = $_SESSION[$theme_id]+1;
+		$image_name = $_SESSION['last_entry'].'-'.$entry_item.$_SESSION[$theme_id].'-'.str_replace(" ","",ucwords($user_fname_lname));
+
+		$targetPath = $_SERVER['DOCUMENT_ROOT'].'/wp-content/uploads/LifeFramerV2/';
+		$ext = strtolower(pathinfo($_FILES['img-submit']['name'], PATHINFO_EXTENSION));
+		$targetFile = $targetPath.''.$image_name.'.'.$ext;
+
+		if (!file_exists($targetPath)) {
+		    mkdir($targetPath, 0777, true);
+	    }
+			
+		$image = wp_get_image_editor( $_FILES['img-submit']['tmp_name'] );
+
+		if ( ! is_wp_error( $image ) ) {
+
+			/* Get image orientation - LAndscape/portrait/square */
+			$image_size = $image->get_size();
+			/* Langscape */ 
+			if($image_size['width'] > $image_size['height']){
+				$image->resize( 268, null, false);
+			} 
+			
+			elseif ($image_size['width'] < $image_size['height']) {
+				/* Portrait */ 
+				$image->resize( null, 210, false);
+			} else {
+				/* Square */ 
+				$image->resize( 170, 170, false);
+			}
+
+
+
+			// $image->resize( 300, 300, true );
+			$image->set_quality(100);
+			$image->save($targetFile);
+
+			/* Insert new entry to lf_photos */
+			insert_lf_photo($_SESSION['last_entry'], '/LifeFramerV2/'.$image_name.'.'.$ext, $current_theme,$current_entry_theme);
+
+			/* Update entry - > increase the number of images */
+			if($role=='member'){
+				update_lf_entry($_SESSION['last_entry']);
+			}
+			elseif($role=='entrant'){
+				$user_id = $_GET['user_id'];
+				$extra_credits = get_user_meta($user_id,'extra_entry_imgs',true);
+				if($extra_credits>0){
+					update_lf_entry_extra_credits($_SESSION['last_entry']);
+					update_user_meta($user_id,'extra_entry_imgs',$extra_credits-1);
+				}
+				else{
+					update_lf_entry($_SESSION['last_entry']);
+				}
+				
+			}
+
+			/* Save image to Google Drive - */ 
+			$response = insert_image_to_drive($image_name.'.'.$ext, $_FILES['img-submit']['tmp_name'], $_FILES['img-submit']['type']);
+			if(strpos($response, 'error') !== false){
+				if (!file_exists($targetPath.'Google-Drive-Error')) {
+				    mkdir($targetPath.'Google-Drive-Error', 0777, true);
+				}
+			    $image_full = wp_get_image_editor( $_FILES['img-submit']['tmp_name'] );
+			    if ( ! is_wp_error( $image_full ) ) {
+		    		$image_full->set_quality(90);  
+					$image_full->save($targetPath.'Google-Drive-Error/'.''.$image_name.'.'.$ext);
+				}
+			}
+			$submit_response['drive'] = $response;
+		}
+
+	}
+
+	$_SESSION['success_uploaded'] = $_SESSION['success_uploaded'] + 1;
+	$submit_response['success_uploaded'] = $_SESSION['success_uploaded'];
+
+	/*All images were uploaded*/
+
+	if($_SESSION['success_uploaded']==$_GET['all_images']){
+		/* Send confirmation mail */
+		$mail_headers[] = 'From: Life Framer <info@life-framer.com>';
+	    $mail_headers[] = 'Cc: Life Framer <info@life-framer.com>';
+		$mail_headers[] = 'Content-type: text/html;charset=utf-8' . "\r\n";
+
+	    $to = $user_email;
+	    $customer_name = ucfirst($user_fname_lname);
+
+	    $subject = "Life-Framer Submit Images Successful!";
+
+	    swph_send_upload_confirmation_email($to, $mail_headers, $customer_name);
+
+
+	}
+
+	echo json_encode($submit_response);
+
+	die();
+}
+
+// $t = insert_image_to_drive('','','');
+// echo '<pre>'.print_r($t,1).'</pre>';
+// die();
+
+function insert_image_to_drive($img_name,$tmp_name,$tmp_type){
+
+	require_once get_stylesheet_directory().'/includes/google-api-php-client/vendor/autoload.php';
+	$client = new Google_Client();
+	// echo '<pre>'.print_r($client,1).'</pre>';
+	$client->setAuthConfig(get_stylesheet_directory().'/includes/client_secret.json');
+
+	$client->setAccessType("offline");        // offline access
+	$client->setIncludeGrantedScopes(true);   // incremental auth
+	$client->addScope(Google_Service_Drive::DRIVE);
+
+	// $client->setRedirectUri($this->redirectUri);
+    $client->setApprovalPrompt('force');
+
+	$googledrive_access_token = get_option('googledrive_access_token');
+	// die();
+
+	// add_option( 'googledrive_access_token', $googledrive_access_token);
+
+	if (isset($googledrive_access_token) && $googledrive_access_token !='') {
+		/* client refresh access token */ 
+	try {
+
+		$client->setAccessToken($googledrive_access_token);
+				 
+		if ($client->isAccessTokenExpired()) {
+
+
+			// save refresh token to some variable
+			$refreshTokenSaved = $client->getRefreshToken();
+
+			// update access token
+			$client->fetchAccessTokenWithRefreshToken($refreshTokenSaved);
+
+			// pass access token to some variable
+			$accessTokenUpdated = $client->getAccessToken();
+
+
+			// append refresh token
+			$accessTokenUpdated['refresh_token'] = $refreshTokenSaved;
+			update_option('googledrive_access_token',$accessTokenUpdated);		
+
+			//Set the new acces token
+			$accessToken = $refreshTokenSaved;
+			$client->setAccessToken($accessTokenUpdated);
+		}
+
+
+		
+		$service = new Google_Service_Drive($client);
+		$file = new Google_Service_Drive_DriveFile();
+
+		$folder_id = '';
+
+		    $get_folder = $service->files->listFiles(array(
+		        'q' => 'name="LifeFramerV2"',
+		        'spaces' => 'drive',
+		        'mimeType'=>'application/vnd.google-apps.folder',
+		        'fields' => 'files(id, name)',
+		    ));
+
+		    if(!empty($get_folder_files = $get_folder->files)){
+		    	$get_folder_files = $get_folder->files;
+		    	$folder_id = $get_folder_files[0]->id;
+		    }
+		    else{
+
+		    	$folderMetadata = new Google_Service_Drive_DriveFile(array(
+				    'name' => 'LifeFramerV2',
+				    'mimeType' => 'application/vnd.google-apps.folder'
+				));
+
+				$folder = $service->files->create($folderMetadata, array(
+				    'fields' => 'id'));
+
+				if($folder){
+					$folder_id = $folder->id;
+				}
+
+		    }
+
+			$fileMetadata = new Google_Service_Drive_DriveFile(array(
+			    'name' => $img_name,
+			    'parents' => array($folder_id)
+			));
+
+			$result = $service->files->create(
+			      $fileMetadata,
+			      array(
+			        'data' => file_get_contents($tmp_name),
+			        'mimeType' => $tmp_type,
+			        'uploadType' => 'media'
+			      )
+			);
+			if($result->id) {
+				$response = $result->id;
+			} 
+		} 
+		catch (Exception $e) {
+     		$response =  "An error occurred: " . $e->getMessage();
+        }
+	}
+	else 
+	{
+	  $response = 'error';
+	}
+	return $response;
+}
+
+
+add_action( 'wp_ajax_ns_submit_upload_completed', 'ns_submit_upload_completed' );
+add_action( 'wp_ajax_nopriv_ns_submit_upload_completed', 'ns_submit_upload_completed' );
+
+function ns_submit_upload_completed() {
+	global $wpdb;
+
+	check_ajax_referer( 'submitimages-ajax-nonce', 'security', false );
+
+	$total_images = $_POST['total_images'];
+	$total_images = array_filter($total_images);
+
+	foreach ($total_images as $key => $total) {
+		/* Update _lf_entry table with correct number of photos and add entry description */
+
+		$wpdb->update( 
+			"{$wpdb->prefix}lf_entry", 
+			array( 
+				'no_images' => $total,
+				'additional_information' => strip_tags($_POST['entry_description']),
+
+			), 
+			/* Where statement */
+			array( 
+				'wp_user' => $_POST['user_login'],
+				'date_time' => $_POST['date_time'],
+				'theme_id' => $key
+			), 
+			array( 
+				'%d',	// value1
+				'%s'	// value2
+			), 
+			array( 
+				'%s',
+				'%s',
+				'%d'
+			) 
+		);
+	}
+
+	/* Send confirmation mail */
+	$mail_headers[] = 'From: Life Framer <info@life-framer.com>';
+    $mail_headers[] = 'Cc: Life Framer <info@life-framer.com>';
+	$mail_headers[] = 'Content-type: text/html;charset=utf-8' . "\r\n";
+
+    $user_login = get_user_by('login', $_POST['user_login']);
+    $to = $user_login->user_email;
+    $customer_name = ucfirst($user_login->first_name) . ' ' . ucfirst($user_login->last_name);
+
+    $subject = "Life-Framer Submit Images Successful!";
+
+    swph_send_upload_confirmation_email($to, $mail_headers, $customer_name);
+    // echo $send_mail;
+	die();
+}
+
+
+add_action('entry_submissions', 'generate_entry_submissions');
+
+function generate_entry_submissions(){
+    /* Start Date = 30 days from now */
+    $end_date  = date('Y-m-d');
+    $start_date  = date('Y-m-d', strtotime($end_date . " -30 days"));
+?>
+    <h2>Generate Entry Submissions</h2>
+    <form action="<?= admin_url('admin.php'); ?>" method="post" style="display: inline">
+        <input type="hidden" name="action" value="generate_csv_entries">
+        <label>Start date: </label><input type="date" name="start_date" value="<?php echo $start_date; ?>">
+        <label>End date: </label><input type="date" name="end_date" value="<?php echo $end_date; ?>"><br><br>
+        <input type="submit" value="Generate entries" class="button button-primary">
+    </form>
+<?php
+}
+add_action('admin_action_generate_csv_entries', 'generate_csv_entries_fc');
+function generate_csv_entries_fc(){
+	global $wpdb;
+
+    if(isset($_POST['start_date']) && $_POST['start_date'] != '' && isset($_POST['end_date']) && $_POST['end_date'] != '' ){
+        $where = 'lf_payments.date BETWEEN "'.$_POST['start_date'].' 00:00:00.000000" AND "'.$_POST['end_date'].' 23:59:59.999999"';
+        $xls_name = ' '.$_POST['start_date'].' - '. $_POST['end_date']. ' ';
+    }
+    else{
+        $where = '1=1';
+        $xls_name = '';
+    }
+
+
+	$entries = $wpdb->get_results(
+	    "SELECT 
+	    lf_entry.id,
+	    lf_entry.time,
+	    lf_entry.name,
+	    lf_entry.wp_user,
+	    lf_entry.email_address,
+	    lf_entry.additional_information,
+	    lf_entry.payment,
+	    lf_payments.description,
+	    lf_payments.date,
+	    lf_entry.payment_reference,
+	    lf_entry.no_images
+	    FROM {$wpdb->prefix}lf_entry AS lf_entry
+	    INNER JOIN {$wpdb->prefix}lf_payments AS lf_payments
+	    ON lf_entry.payment_reference =  lf_payments.payment_ref 
+	    WHERE date_time>0 AND ".$where. "ORDER BY lf_payments.date DESC", ARRAY_A);
+
+
+	header('Content-Type: text/csv; charset=utf-8');
+	header('Content-Disposition: attachment; filename=LifeFramer-Entries-'.$xls_name.'.csv');
+
+	// create a file pointer connected to the output stream
+	$output = fopen('php://output', 'w');
+	if (PHP_EOL == "\r\n")
+	{
+	    $eol = "\n";
+	}
+	else
+	{
+	    $eol = "\r\n";
+	}
+	// output the column headings
+	fputcsv($output, array('Entry Id','Upload Date','Name','WP Username','Email','Additional information','Payment amount (dollars)',   'Payment description','Payment date','Payment reference','Number of photos'), ',','"', $eol);
+
+	// fetch the data
+	// loop over the rows, outputting them
+	foreach($entries as $entry){
+	    fputcsv($output, $entry, ",",'"', $eol);
+	}
+	fclose($output);
+	exit();
+}
+
+
+
+/* Google drive functionality - OAuth */
+
+function wpdocs_register_google_drive_oauth(){
+    add_menu_page( 
+        __( 'Google Drive OAuth', 'textdomain' ),
+        'Google Drive OAuth',
+        'manage_options',
+        'google-drive-oauth',
+        'google_drive_oauth',
+        'dashicons-flag',
+        999
+    ); 
+}
+add_action( 'admin_menu', 'wpdocs_register_google_drive_oauth' );
+ 
+/**
+ * Drive debup purpose
+ */
+function google_drive_oauth(){
+?>
+
+	<div class="wrap">
+		<h2>Google Drive OAuth</h2>
+
+		<?php
+			// update_option('googledrive_access_token','');
+			// die();
+			$googledrive_access_token = get_option('googledrive_access_token');		
+
+			if(!empty($googledrive_access_token)){
+					echo '<h3>Your access token:</h3>';
+					echo '<pre>'.print_r($googledrive_access_token,1).'<pre>';
+			}
+
+			// echo '<p>Date:'. date("Y-m-d H:i:s") .' </p>';
+
+			require_once get_stylesheet_directory().'/includes/google-api-php-client/vendor/autoload.php';
+			$client = new Google_Client();
+			$client->setAuthConfig(get_stylesheet_directory().'/includes/client_secret.json');
+
+			$client->setAccessType("offline");        // offline access
+			$client->setIncludeGrantedScopes(true);   // incremental auth
+			$client->addScope(Google_Service_Drive::DRIVE);
+			// $client->revokeToken(); 
+			// die();
+
+			$client->setApprovalPrompt('force');
+			// $client->setRedirectUri($this->_redirectURI);
+
+			if (isset($googledrive_access_token) && $googledrive_access_token !='') {
+				/* client refresh access token */ 
+		
+
+				 $client->setAccessToken($googledrive_access_token);
+
+				  if ($client->isAccessTokenExpired()) {
+
+			  		echo '<p>token expired</p>';
+			  		echo '<p>Get refresh token....</p>';
+				  	// save refresh token to some variable
+			        $refreshTokenSaved = $client->getRefreshToken();
+
+			        echo '<p>Refresh token:</p>';
+			        echo '<pre>'.print_r($refreshTokenSaved,1).'</pre>';
+
+
+			        // update access token
+			        $client->fetchAccessTokenWithRefreshToken($refreshTokenSaved);
+
+			        // pass access token to some variable
+			        $accessTokenUpdated = $client->getAccessToken();
+
+			        echo '<p>Generating new acccess token....</p>';
+			        echo '<p>New access token</p>';
+			        echo '<pre>'.print_r($accessTokenUpdated,1).'</pre>';
+
+			        // append refresh token
+			        $accessTokenUpdated['refresh_token'] = $refreshTokenSaved;
+			        update_option('googledrive_access_token',$accessTokenUpdated);		
+
+			        //Set the new acces token
+			        $accessToken = $refreshTokenSaved;
+			        $client->setAccessToken($accessTokenUpdated);
+
+					// Array
+					// (
+					//     [access_token] => ya29.GltfBad3inSW694P2xzUW9l9BdBqkWpBUZd9sANMF5t6fKebZb_Y3WU5ak-dYE6fg5RhB7C6VWO8CotaegCqUhrXMN7paqOYM1UCJba4mAGuHdN6Rxry0iMiCfXT
+					//     [token_type] => Bearer
+					//     [expires_in] => 3600
+					//     [created] => 1518364451
+					//     [refresh_token] => 1/9KCqYaTrWrGfBZJ63nLL_1_9GtVn1UenPJ7TUZrvOv_02D_yIURIr_ijqYmUHvJR
+					// ) [refresh_token] => 1/9KCqYaTrWrGfBZJ63nLL_1_9GtVn1UenPJ7TUZrvOv_02D_yIURIr_ijqYmUHvJR
+					// )
+				  }
+				  else{
+				  	echo 'token not expired';
+				  }
+
+		} 
+
+		else {
+		  $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '?create_token=true';
+		  header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+		}
+
+		?>
+	</div>
+
+<?php
+}
+
+/* Action to create OAuth2 for Drive */
+if(isset($_GET['create_token'])&& ($_GET['create_token']=='true')){
+	add_action('template_redirect','create_token_wp');
+}
+
+function create_token_wp(){
+	require_once get_stylesheet_directory().'/includes/google-api-php-client/vendor/autoload.php';
+
+	$token ='';
+
+	$client = new Google_Client();
+	$client->setAuthConfig(get_stylesheet_directory().'/includes/client_secret.json');
+
+	$client->setRedirectUri('https://' . $_SERVER['HTTP_HOST'] . '?create_token=true');
+	$client->addScope(Google_Service_Drive::DRIVE);
+	$client->setIncludeGrantedScopes(true);
+	$client->setAccessType('offline');
+    $client->setApprovalPrompt('force');
+
+	if (!isset($_GET['code'])) {
+	  $auth_url = $client->createAuthUrl();
+	  header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+	} else {
+	  $client->authenticate($_GET['code']);
+	  $token = $client->getAccessToken($token);
+	  update_option( 'googledrive_access_token',$token);
+	  // $_SESSION['access_token'] = $client->getAccessToken();
+	  $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/wp-admin/admin.php?page=google-drive-oauth';
+	  header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+	}
+
+}
+
+/* Prefill User email on registration form based on email member/entrant filled in the payment form */
+if(isset($_GET['transaction']) && ($_GET['transaction']!='') && isset($_GET['email']) && ($_GET['email']!='') ) {
+	add_action('template_redirect','registration_process_fill_email',999);
+}
+function registration_process_fill_email(){
+	?>
+	<script type="text/javascript">
+		var payment_email = '<?php echo $_GET['email'];?>';
+	</script>
+	<?php
+}
+
+
+/* Allows admin to delete photos from the users submision */
+
+add_action( 'show_user_profile', 'extra_credits_user_profile', 10, 1 );
+add_action( 'edit_user_profile', 'extra_credits_user_profile', 10, 1 );
+
+function extra_credits_user_profile( $user ) { 
+	$user_id = $user->ID;
+	global $ultimatemember;
+	um_fetch_user( $user_id );
+	$user_role = $ultimatemember->user->get_role();
+
+	if($user_role=='entrant'){
+	?>
+		<table class="form-table extra-credits">
+	        <tbody>
+	        	<tr>
+	        		<th colspan="2"><h3>Entrant allowed images to submit</h3></th>
+	        	</tr>
+	    	<?php
+
+			// $get_active_LF_entries_entrant = get_active_LF_entries_entrant();
+			$get_active_LF_entries_entrant = get_active_LF_entries();
+			
+			$images_to_submit = 0;
+			/* In case  there are open themes */
+			if(!empty($get_active_LF_entries_entrant)){
+
+				$theme_start_date = $get_active_LF_entries_entrant[0]->start;
+				$user_email = $user->user_email;
+				$user_login = $user->user_login;
+				/* Get images to submit */
+				$images_to_submit = get_images_left_to_submit($user_email,$user_login,$user_role,$theme_start_date);
+				?>
+				<tr>
+	            	<th>
+	            		<label for="user_img_left">Images left to submit:</label>
+	            	</th>
+	            	<td><span class="images_no left_to_submit"><?php echo $images_to_submit;?></span></td>
+	        	</tr>
+	            	<?php
+			}
+
+			$extra_credits = get_user_meta($user_id,'extra_entry_imgs',true);
+
+			?>
+
+			<tr>
+	        	<th>
+	        		<label for="extra_entry_imgs">Add number of free entry images:</label>
+	        	</th>
+	        	<td>
+	        		<input type="number" min="0" value="<?php echo $extra_credits;?>" name="extra_entry_imgs" id="extra_entry_imgs">
+	        	</td>
+	    	</tr>
+			<!-- <tr>
+	        	<th>
+	        		<label for="total_entry_imgs">Total entry images: </label>
+	        	</th>
+	        	<td><span class="images_no total_entry_imgs"><?php //echo $images_to_submit+$extra_credits;?></span></td>
+	    	</tr> -->
+    	 </tbody>
+		</table>
+	    	<?php
+		}
+
+}
+
+
+function save_extra_credits_user_profile($user_id){
+
+    if(!current_user_can('manage_options'))
+        return false;
+
+    # save my custom field
+    if( isset($_POST['extra_entry_imgs']) ) {
+        update_user_meta( $user_id, 'extra_entry_imgs', sanitize_text_field( $_POST['extra_entry_imgs'] ) );
+    } else {
+        //Delete the company field if $_POST['company'] is not set
+        delete_user_meta( $user_id, 'extra_entry_imgs' );
+    }
+}
+add_action( 'edit_user_profile_update', 'save_extra_credits_user_profile' );
+
+
+/* Allows admin to delete photos from the users submision */
+
+add_action( 'show_user_profile', 'extra_user_profile_fields', 10, 1 );
+add_action( 'edit_user_profile', 'extra_user_profile_fields', 10, 1 );
+
+function extra_user_profile_fields( $user ) { ?>
+	
+	<?php
+
+	// echo '<pre>'.print_r($user,1).'</pre>';
+    $user_login = $user->data->user_login;
+    $user_id = $user->data->ID;
+
+/* Past submitions functionality */
+	global $wpdb;
+	$current_user = wp_get_current_user();
+
+
+
+	$images_subbmitted = $wpdb->get_results(
+	"SELECT 
+	lf_entry.time,
+	lf_entry.theme_id,
+	lf_photos.path,
+	lf_entry.id as entry_id,
+	lf_photos.id as photo_id,
+	lf_themes.name as theme_name
+    FROM {$wpdb->prefix}lf_entry AS lf_entry
+    INNER JOIN {$wpdb->prefix}lf_photos AS lf_photos
+    ON lf_photos.entry_id =  lf_entry.id 
+
+	INNER JOIN {$wpdb->prefix}lf_themes AS lf_themes
+    ON lf_entry.theme_id =  lf_themes.id 
+
+    WHERE lf_entry.wp_user='$user_login' 
+    and lf_entry.date_time>0 ORDER BY lf_entry.time DESC", ARRAY_A);
+    
+	// echo '<pre>'.print_r($images_subbmitted,1).'</pre>';
+
+    if($images_subbmitted){
+
+		$upload_dir = wp_upload_dir();
+		$upload_baseurl = $upload_dir['baseurl'];
+		$upload_basedir = $upload_dir['basedir'];
+
+		echo '<input type="hidden" name="delete_img_sub-ajax-nonce" id="delete_img_sub-ajax-nonce" value="' . wp_create_nonce( 'delete_img_sub-ajax-nonce' ) . '" />';
+
+		/* Change theme per image functionality */
+
+    	echo '<div class="images-submitted">';
+		echo '<h3>Users Past Uploads</h3>';
+		$date = '';
+		foreach ($images_subbmitted as $key => $result) {
+			# code...
+
+			if($date != $result['time']){
+				$submittion_date = date('d M Y',strtotime($result['time']));
+				if($key!='0')
+					{
+						echo '<div class="clearfix"></div>';
+						echo '</div><!--end 1 -->';
+						echo '</div><!--end 2 -->';
+					}
+
+				echo '<div class="submittion-items">';
+				echo '<span>- '.$submittion_date.'</span>';
+				echo '<div class="submittion-images submittion-images-backend">';
+			}
+
+			if(file_exists($upload_basedir.''.$result['path'])){
+				$get_image = wp_get_image_editor( $upload_basedir.''.$result['path']);
+				$square_img_class = '';
+				if ( ! is_wp_error( $get_image ) ) {
+					$get_image_size = $get_image->get_size();
+					if($get_image_size['width'] == $get_image_size['height']){
+						$square_img_class = 'square-img';
+					}
+
+				}
+				echo '<div class="submittion-image">';
+				echo '<div class="submittion-image-holder">';
+				echo '<a class="delete-img-sub" data-entry-id="'.$result['entry_id'].'" data-photo-id="'.$result['photo_id'].'" data-user-id="'.$user_id.'"></a>';
+				echo '<img src="'.$upload_baseurl.''.$result['path'].'" class="'.$square_img_class.'">';
+				$img_name = explode('/',$result['path']);
+				$img_name = $img_name[count($img_name)-1];
+				echo '<p class="image-info">';
+					echo '<textarea class="entry-img_name" disabled>'.$img_name.'</textarea>';
+					echo '<br>';
+					echo '<span class="change-img_name" data-entry-id="'.$result['entry_id'].'" data-photo-id="'.$result['photo_id'].'" data-user-id="'.$user_id.'"><span>Change image name</span></span>';
+					echo '<span style="display:none" class="save-img_name" data-entry-id="'.$result['entry_id'].'" data-photo-id="'.$result['photo_id'].'" data-user-id="'.$user_id.'"><span>Save theme</span></span>';
+				echo '</p>';
+				// $theme_name = $result['theme_name'];
+				// $themes = explode(',',$theme_name);
+				?>
+				<!-- <select name="change_theme"> -->
+					<?php
+					// foreach($themes as $theme){
+					// 	/* Check if photo is already on theme */
+					// 	if(strpos($result['path'],$theme) !== false){
+					// 		$selected = 'selected="selected"';
+					// 	}
+					// 	else{
+					// 		$selected = '';
+					// 	}
+					// 	echo '<option value="'.$theme.'" '.$selected.'>'.$theme.'</option>';
+					// }
+					?>
+				<!-- </select> -->
+				<?php
+				echo '</div><!--end submision image holder-->';
+				echo '</div><!--end submision image-->';
+			}
+			$date = $result['time'];
+			
+		}
+		echo '<div class="clearfix"></div>';
+		echo '</div><!--end 1 -->';
+		echo '</div><!--end 2 -->';
+
+		echo '</div>';
+		echo '</div>';
+    }
+?>
+
+
+<?php }
+
+/* Change image name from dashboard */
+add_action( 'wp_ajax_lf_change_img_name', 'lf_change_img_name' );
+add_action( 'wp_ajax_nopriv_lf_change_img_name', 'lf_change_img_name' );
+
+function lf_change_img_name(){
+	$response = array();
+	$response['output'] = $response['error'] = '';
+
+	try{
+		check_ajax_referer( 'delete_img_sub-ajax-nonce', 'security', false );
+		global $wpdb;
+		$photo_id = $_POST['photo_id'];
+		$new_image_name = $_POST['new_img_name'];
+
+		$get_entry = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}lf_photos WHERE id = '$photo_id'");
+		// print_r($get_entry);
+		if(!empty($get_entry)){
+			// echo print_r($get_entry,1);
+			// echo "\r\n";
+			$image_path = $get_entry->path;
+			$image_path_array = explode('/',$image_path);
+
+			$old_image_name = $image_path_array[count($image_path_array)-1];
+			// echo $old_image_name;
+			// echo "\r\n";
+
+			/* If the name was changed in the form -> update image name in thumbnail folder and in database*/
+			if(trim($old_image_name) != trim($new_image_name) ){
+				
+				$upload_dir = wp_upload_dir();
+				$upload_basedir = $upload_dir['basedir'];
+				// echo $upload_basedir;
+				// echo "\r\n";
+				// echo print_r($image_path_array,1);
+				if(!file_exists($upload_basedir.'/'.$image_path_array['1'].'/'.$new_image_name)){
+					// echo 'can be renamed';
+					try{
+						// rename( $old_name, $new_name)
+						rename( $upload_basedir.'/'.$image_path_array['1'].'/'.$old_image_name, $upload_basedir.'/'.$image_path_array['1'].'/'.$new_image_name);
+						/* Update DB */
+						$wpdb->update( 
+							"{$wpdb->prefix}lf_photos", 
+							array( 
+								'path' => '/'.$image_path_array['1'].'/'.$new_image_name,
+							), 
+							/* Where statement */
+							array( 
+								'id' => $photo_id
+							),  
+							array( 
+								'%s'
+							), 
+							array( 
+								'%d'
+							) 
+						);
+						$response['output'] = trim($new_image_name);
+					}
+					catch (Exception $e) {
+						$response['error'] =  "An error occurred: " . $e->getMessage();
+				   }
+				}
+				else{
+					/*image already exists => increment i  */
+					// echo 'do more';
+					// echo "\r\n";
+					$new_image_name_array = explode('-',$new_image_name);
+					$new_theme_name = $new_image_name_array['1'];
+					$image_index = 0;
+					preg_match('!\d+!', $new_theme_name, $nb);
+					if(!empty($nb)){
+						$image_index = $nb['0'];
+					}
+					$theme_name = preg_replace('/[0-9]+/', '', $new_theme_name);
+					
+					// echo 'number='.$image_index;
+					// echo "\r\n";
+					
+					// echo 'generate new name='.$generate_new_name;
+					$name_exists = true;
+					while($name_exists){
+						$image_index +=1;
+						$generate_new_name = '';
+						foreach($new_image_name_array as $key=> $part){
+							if($key=='1'){
+								
+								$generate_new_name .= $theme_name.$image_index;
+							}
+							else{
+								$generate_new_name .= $part;
+							}
+							
+							if($key != count($new_image_name_array)-1){
+								$generate_new_name .= '-';
+							}
+						}
+						// echo $generate_new_name;
+						/* Check if file exists */
+						if(!file_exists($upload_basedir.'/'.$image_path_array['1'].'/'.$generate_new_name)){
+							$name_exists = false;
+							try{
+								// rename( $old_name, $new_name)
+								rename( $upload_basedir.'/'.$image_path_array['1'].'/'.$old_image_name, $upload_basedir.'/'.$image_path_array['1'].'/'.$generate_new_name);
+								/* Update DB */
+								$wpdb->update( 
+									"{$wpdb->prefix}lf_photos", 
+									array( 
+										'path' => '/'.$image_path_array['1'].'/'.$generate_new_name,
+									), 
+									/* Where statement */
+									array( 
+										'id' => $photo_id
+									),  
+									array( 
+										'%s'
+									), 
+									array( 
+										'%d'
+									) 
+								);
+							}
+							catch (Exception $e) {
+								$response['error'] =  "An error occurred: " . $e->getMessage();
+						   }
+						}
+					}
+					$response['output'] = trim($generate_new_name);
+				}
+			}
+			else{
+				$response['output'] = trim($new_image_name);
+			}
+
+		}
+	}
+
+	catch (Exception $e) {
+		$response['error'] =  "An error occurred: " . $e->getMessage();
+   }
+
+	echo json_encode($response);
+	die();
+}
+
+
+add_action( 'wp_ajax_delete_entry_image', 'delete_entry_image' );
+add_action( 'wp_ajax_nopriv_delete_entry_image', 'delete_entry_image' );
+
+function delete_entry_image(){
+
+	$response = array();
+	$response['extra'] = $response['normal'] = $response['error'] = '';
+
+	try{
+
+		check_ajax_referer( 'delete_img_sub-ajax-nonce', 'security', false );
+		global $wpdb;
+
+		$entry_id = $_POST['entry_id'];
+		$photo_id = $_POST['photo_id'];
+		$user_id = $_POST['user_id'];
+
+		$get_entry = $wpdb->get_row("SELECT id, no_images, no_img_extra FROM {$wpdb->prefix}lf_entry WHERE id = '$entry_id'");
+
+	    $normal_imgs = $get_entry->no_images;
+	    $extra_imgs = $get_entry->no_img_extra;
+
+	    if($extra_imgs > 0){
+	    	/* Reduce images from extra credit */
+	    	$reduce_extra_imgs = $extra_imgs - 1;
+	    	$response['extra'] = 1;
+	    	/*Update lf_entry table - column "no_img_extra" */
+	    	$wpdb->update( 
+					"{$wpdb->prefix}lf_entry", 
+					array( 
+						'no_img_extra' => $reduce_extra_imgs,
+					), 
+					/* Where statement */
+					array( 
+						'id' => $entry_id
+					),  
+					array( 
+						'%d'
+					), 
+					array( 
+						'%d'
+					) 
+				);
+				/* User_extra_images */
+				$user_extra_images = get_user_meta($user_id,'extra_entry_imgs',true);
+				update_user_meta($user_id,'extra_entry_imgs',$user_extra_images+1);
+	    }
+	    else{
+	    	if($normal_imgs>0){
+	    		/* Reduce images from normal credit */
+	    		$reduce_normal_imgs = $normal_imgs - 1;
+	    		$response['normal'] = 1;
+	    		/*Update lf_entry table - column "no_images" */
+	    		$wpdb->update( 
+					"{$wpdb->prefix}lf_entry", 
+					array( 
+						'no_images' => $reduce_normal_imgs,
+					), 
+					/* Where statement */
+					array( 
+						'id' => $entry_id
+					), 
+					array( 
+						'%d'
+					), 
+					array( 
+						'%d'
+					) 
+				);
+	    	}
+	    }
+
+	   
+	    /* normal images = 0, extra images 0 => Delete entry */
+	    if(($normal_imgs + $extra_imgs) =='1'){
+			$wpdb->delete( 
+		    	"{$wpdb->prefix}lf_entry", 
+		    	array( 
+		    		'id' => $entry_id 
+		    	), 
+		    	array( 
+		    		'%d'
+		    	) 
+    		);
+	    }
+
+
+	    $upload_dir = wp_upload_dir();
+		$upload_baseurl = $upload_dir['baseurl'];
+		$upload_basedir = $upload_dir['basedir'];
+
+		$get_image = $wpdb->get_row("SELECT id,path FROM {$wpdb->prefix}lf_photos WHERE id = '$photo_id'");
+	    $img_path = $get_image->path;
+
+	    if(file_exists($upload_basedir.''.$img_path)){
+	    	 unlink($upload_basedir.''.$img_path);
+	    }
+
+	    $wpdb->delete( 
+	    	"{$wpdb->prefix}lf_photos", 
+	    	array( 
+	    		'id' => $photo_id 
+	    	), 
+	    	array( 
+	    		'%d'
+	    	) );
+
+	}
+
+	catch (Exception $e) {
+     		$response['error'] =  "An error occurred: " . $e->getMessage();
+        }
+
+    echo json_encode($response);
+
+	die();
+}
+
+
+/* Extend theme functionality - split entries */
+add_action( 'wp_ajax_split_theme_entries', 'split_theme_entries' );
+add_action( 'wp_ajax_nopriv_split_theme_entries', 'split_theme_entries' );
+
+function split_theme_entries(){
+
+	// echo '<pre>'.print_r($_POST,1).'</pre>';
+	$theme_name = filter_input(INPUT_POST, 'theme_name');
+	$theme_start = filter_input(INPUT_POST, 'theme_start_date');
+	$theme_end = filter_input(INPUT_POST, 'theme_end_date');
+	if($theme_name!=''){
+
+
+		echo '<h3>Set deadline for entrants </h3><div class="clearfix"></div>';
+		echo '<label>'.$theme_name.' - Deadline: </label>';
+		echo '<input type="text" name="entry-deadline-entrants[]" value="'.$theme_end.'">';
+		echo '<input type="hidden" name="entry-name-entrants[]" value="'.$theme_name.'">';
+		echo '<hr>';
+		if(strpos($theme_name, ',') === false){
+			echo '<h3>Split deadline entries for members</h3><div class="clearfix"></div>';
+			echo '<label>'.$theme_name.' - Deadline: </label>';
+			echo '<input type="text" name="entry-deadline[]" value="'.$theme_end.'">';
+			echo '<input type="hidden" name="entry-name[]" value="'.$theme_name.'">';
+		}
+		else{
+			/*Split entryes */
+			$themes = explode(',', $theme_name);
+			echo '<h3>Split entries for members</h3><div class="clearfix"></div>';
+			foreach($themes as $theme){
+				$theme = trim($theme);
+				echo '<label><b>'.$theme.'</b> - Deadline: </label>';
+				echo '<input type="text" name="entry-deadline[]" value="'.$theme_end.'">';
+				echo '<input type="hidden" name="entry-name[]" value="'.$theme.'"><br>';
+			}
+		}
+	}
+	
+	else{
+		echo '<span class="error">Theme name empty</span>';
+	}
+	die();
+
+}
+
+
+
+function swph_send_upload_confirmation_email($to, $mail_headers, $customer_name) {
+	$subject = "Image submission successful!";
+	$content = '<html>
+		<style type="text/css">
+		    @media only screen and (max-width: 780px){
+		        .layoutTable{
+		            display:block !important;
+		            width:100% !important;
+		        }
+		    }
+		</style>
+			<body>
+				<table style="margin: 0 auto; width: 80%; text-align: center; border: none; border-collapse: separate; font-size: 16px" cellpadding="0" border="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td style="border: none;" colspan="4"><img style="width: 15%;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAAgVBMVEUAAAAEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwd9XAmHAAAAKnRSTlMABIrMCLquVPXsJpci70YC0NX56PfewaZXSj8sGMWTaWc3EX+YKbOamV7MaCJ9AAACHklEQVR42u3b606zUBCF4QX9tJsW5VCUVj7roR7n/i/QnZigFamZkI4rcd4reJJZIfsP8LxvWp9O6um1wFE6lUmlCY7TAycrSSlZKB4oWUDLycKSk5WklCwUS0oW0HKysOVkJSklK+6LkgW0nCxsOVlJSslCsaVkAS0nC7uX5Xgn37AI2nCy5s5y1nvO0uQsTc7S5CxNztL0V1ibX2MtsiaMVv8aC1cZ41se2GSULNwFSha6QMmK+6JkxX1RsuK+VKznAjZ1QcMqy3vYdLVSsGZy+R82bTINSy7/waa7oGFJabWvx6BhyYxmX3ssu32dZxqWXJPsa49luq8zDUvsvl8XZ33hIMt2X9153+4gq9+XdfMfWbEqgSIDlmJfhizFvixZin1ZsrT7smdJqbijIUvaAorMWCfj83KWs5zlLIzlLGc5y1kYy1nOcta01pysvKJkIV9RspBfULKwKClZWFSUrLgvSlbcFyUr7ouSFfdFyYr7omTFfVGykM8oWXFflKy4L0pW3BclC3m1ZWShW1OyYs5y1l7O0uQsTc7S5CxNztLkLE3O0uQsTc7S5CxNFiyG/6WGrOtucagcFg1ZdXaw1S0Mmom2MMcgApbUQxcDS8LgjhSsoYuDNdgXCevrvlhY0uzdkYYl4QYf8bCkmaOPiPV5X0wsafo7UrE+9sXFkmYNIEbGkvrdxcaS+jh3rGRqOxyhIpkawxv7D/cGcPAFPT8THBcAAAAASUVORK5CYII=" /></td>
+						</tr>
+						<tr style="">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr>
+							<td style="border: none;" colspan="4"><h2 style="font-size: 24px; text-decoration: underline; font-weight: bold;">UPLOAD SUCCESSFUL</h2></td>
+						</tr>
+						<tr style="">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr>
+							<td style="border: none; text-align: left;" colspan="4">
+								<p>Hello ' . $customer_name . ',</p>
+								<p>
+		                            Thank you very much for your submission to the Life Framer Award
+		                        </p>
+		                        <p>
+		                            Your image(s) found us well. Winners will be selected by our guest judges shortly after the end of each month and you can expect an announcement around the middle of the following month. We will contact all winners directly at the time of announcement as well as sharing the news via our newsletter and social media accounts.
+		                        </p>
+		                        <p>
+		                            If you are not already a subscriber, we will have signed you up for our newsletter. You can always unsubscribe (using a link at the bottom of each issue). Make sure to follow us on <a style="color: black; text-decoration: underline;" href="https://www.facebook.com/lifeframer/">Facebook</a> for our latest news, and on <a style="color: black; text-decoration: underline;" href="https://www.instagram.com/life_framer">Instagram</a> where we will be sharing some of our favourite #lifeframerstories.
+		                        </p>
+		                        <p>
+		                            If you have any questions or feedback, you are always welcome to contact us via <a style="color: black; text-decoration: underline;" href="mailto:support@life-framer.com">ralph@life-framer.com</a>.
+		                        </p>
+								<p>
+		                            Thanks for entering and good luck!<br>
+		                            The Life Framer team.
+		                        </p>
+							</td>
+						</tr>
+						<tr style="">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr>
+							<td style="border: none;" colspan="4"><h2 style="font-size: 24px; text-decoration: underline; font-weight: bold;">DISCOVER MORE<h2></td>
+						</tr>
+						<tr style="">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<table style="width: 49.5%; text-align: center; display: inline-block;"" border="0" cellpadding="10" cellspacing="0" class="layoutTable">
+									<tr>
+										<td style="border: none;">
+											<img width="130" style="max-width: 130px" src="data:image/png;base64,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"/>
+										</td>
+										<td style="border: none;">
+											<img width="130" style="max-width: 130px" src="data:image/png;base64,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"/>
+										</td>
+									</tr>
+									<tr>
+										<td style="border: none;">
+											<a style="font-size: 24px; text-decoration: underline; color: #F15958" href="https://www.life-framer.com/journal/">The Journal</a>
+										</td>
+										<td style="border: none;">
+											<a style="font-size: 24px; text-decoration: underline; color: #F15958;" href="https://www.life-framer.com/series-award/">The Series Award</a>
+										</td>
+									</tr>
+									<tr>
+										<td style="border: none;">
+											Stories, interviews, tips and inspiration.
+										</td>
+										<td style="border: none;">
+											Win a solo exhibition in Rome.
+										</td>
+									</tr>
+								</table>
+
+								<table style="width: 49.5%; text-align: center; display: inline-block;" border="0" cellpadding="10" cellspacing="0" class="layoutTable">
+									<tr>
+										<td style="border: none;">
+											<img width="130" style="max-width: 130px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAADAFBMVEXv7en08+/x8OwVFxYREg8VFRHs6eTv6+by7+n9/Pj7+vb39vIYGhX5+PTr6+j39fDo6OX18uzo5eESFhP///4cHxkYGhnk4dzk3tLk498iIh7h28/d1sgVIBgxKCcZGx4nJyPu59TIx8SJZjkMDgva08bg3NWQb0OPazscHiLCwb2GakXg39sgIibd2M02OTTj4NjMzMmnf0nZ2NS4t7To5dx/ZEB5XjgoNS0XKCDx6dgxMS3r6N+Wc0YpLSceJh/p4tKzsq6CYTQeLie9vLgfFhMFBgTWz8Xc3NjU1NGcdUA8QDuKiIXR0MyurammpKEkJysmLDHhloCqqKWhoJ3Ty8CiekMRJRyad0k9Li51Vy1xcm/z8OWTko+vhlAmGxn49emZl5SWcD3i28m2mnGwk2yMcU2gfExxWTmDgn57enYOHRXm382OjovejneegluUdE7qtZxOT0pGR0KdnJlfYV47KCWrjmWliGBNMjPpq5DonYZpamd+RUbMcmIqMjhoUjQgPzOKTUssIB7Bal2mglSYgmVvQEAwOD+OfmW9oXecfFM2P0aeiWxdSCzhh25peIBXV1MbOCxlOTg4TEJoLCRET1k9WU6slneVe1cuQTjI2Ni9p43Ep36lkHLcfGZqTimCdGN0aVtNWmeUhnBQPijhool7f329d2uYSTtaMS/z7d/JrIfHfHOMd1uoTj1XJR/PfWXSa1W1V0WSOzFYamWBblVENCQ2HRrqv6cnSz60nH9ab345RU/BZ06GQjPWhG+ZVVNIHxyyb2OlYlsSMiYoGQ/grZTccl11NCi1X1h0PDdOXlVoXE3BoH+xzc6ik35PZHJFY2KmVk52ZEvBW0qs2N3ShXykQDiCNSzVvKHsybXTso/HtJ7XnYQnV0gfV4s2dWG8gF7g0bkfaJ1XipKTyclxjYlBiXC4j1XNYE97srtYgnMcR2o1V17N5eh/0doweq/OlHHWx6+tbEcaNlASJjdNnbqsn4uLp6ppq5maY0ST2+tdu8la2aut8fGOlQCQAAA4J0lEQVR42kyWTaiUUBzFp10fRAUtoiKIW3lBaCGkEAghVOQ+MYkK82unFKTthBhBBwfaKYzihLNKXDrB7FrMboZZuIpp1ap1m5ad2wf0977R+3jwfpxz7nEmWWhX6/vtss3b5fLDh+UybdP0cEh7/KJul+OY532f9EmdOL5td5mVWVZoZ59W+yy0qsy2It8px9HzRscRS94TvTj2PFHkeUVUJIlt5l68Wl2bE4OaKjUVQilVKTVNSihRFGNl4O9W0hwTx8ZcMhRCJlaWrbbtoR0OHzDLD8uUceVpXtdFvRzTos6HhE3pJFkWZmFnWZE1f1OE2bHy/dAPypIfdvF84EXRceJ47mFAxUsS70me1MTz+Xq9+iRyCjFNzaQKNTTVNAlRFUoJwAg1GskA2hxwhsEBdWJXq/vLA+RpP+wYF5j6PElAtSnS3ZgUdZHUkAqShZDH6kLR4fltYUWhDUDeLyOnn+/iYfRGUfK82IsxYtOIEnZsP5+vVuutSKZEVjUNekE0XIBRgERARYghGUbTeF7TGJyBmWTz+zAQdoGJWYgBRg6R0n4Y0gJYfYLHcSytPvH90uHF7P48sGF+FPqlHybOEHuJA3BoFMNEjMegDHDN4xUTa/1GMTXCKZqqUt1VBQF4VCEytJIUlTQUzjI0g0gQrjEm43YJpdr0DxYMrJM8KvJ8k/Qt9hsoVeTD0I99aSWRM0Iea71KLKuqqr0NzLD0kaoo4HncvMErJQyjEhtJRF6a+Wq9vi8SnXCSq6qmpmmCJghML5n5ipFWhCPgUxrDUChuzeT5h7YFVsuoxmXbbhZ5DguLNk2GPK3LIk+Tvu8HvrRDKDPmvt1v+8y2s2xv2aXNl5HIlz74AidweI93eAjKyMSY5z2W+PWbd2tF4eCVoEEuLOHZM5hJVEJhKyWfp9RkhhoQDEuRjMmrNj1gffjw/sNygH1/wp6kH5a7tCwWeT94NbgSn89Cx+a93ipuHOBg13VZGEWlHwEkCAMkP+AdkVGJUA5YLGhIGsR6svUkghTpVMABBBqWSzXoZaouUQyZyJT+loudQgPGTtrDh3TJwr5bwrJiU9SbHFTYI1kJvEyGoeyTwoc8VSQOfnY/zqrj8djZIZrCD2zHd8LID7BEUAVgwkhiw4hgIqPaGZ5sEE7WEHQKuSAZoZqmQz/dVChHQWVwgMKCn5SbpMt0SHdLTAv36mKz2SfohPb1bhw+pMNYi/2QlrVtwbYICNX67bHb77MOlxVFPi6IFthoLxQEN+M43udEuIcBFDuFq61oiAavyCby/hsLCyCqOfdMd06owmEoZ6DpFNNUVQ5YP1GjbNK+h3s5slVvNodxN6bDDray+CeO7VcWwBzLju8fra76csTOQrGGPqBmM2R/htZyQMVBNFHCmZS8JvaYWPdRkXwjm7qgU5kQVxOoKhATkK6uKQ2nyJxLiWxI6DGNYVFzcsgPabocMH2BwRHEHFrYlhQFUh7Vee+HIMis0PIj+8Eh67ovmc0q3rIhlw3BLFYcDo/Qz4JAcRzohqJnLQGsN288QxQJNYWpKxOK8pJ118S/NwVVe0ZWYNNgI9fEHNUECKlROlnUxVCny2XPRCoSnLvFYnEY6w04cN7qPOHzKMuw21e2XWx30KrK0A52B8FCRH4WhqhWHkJJSBYXBCLHO03DA4rFa7WFoQZBZFwXuqBTBZmDPqaL2LuCQNAWFJFHz1PtmcYOqwms9vdBy5GqxSbvkHlgDUiYhYhnvmU7SRkiV53dVRtrfS3cd93xWFkVpPKBkztlOLOiKXSCVrIeTZEuWVYkpN6LwbXGqw4mKlTWZQKvZNxdXdZNXYVe1KXoMME1OcngtGfPWKuZsjkp8qRo0ZrogsWf+boYks2+wmXBqzAsI6vD2Yuq6pg8KLrOOkKnLITBmMhx/JkdRjPfgVRBNA1Rm4GuoPDhYew14xYRwxGlnIy4I9g6x7myi42uKxwspQBhC836DHWGJ9U0Jl3JrMuLjVV13b7qjotFstlkFZ4hVrQPM0R731VW1nHVNj1W8BBChYgZU9Hn/cAKAzlCh/os/PpsJupTmedxGtkwsTzJIYSy04ZPwmG5LoyUie7KJgMR4B5V8SngvaRSspqUeb84/Ph65dLVxw9v/nh48/HVx1+/fPn61bLwbrGR6SpEpEMkKsy2OzDaFfIfsS80pWVbgR9lIfQKYKE/nYILnSq75Heb8us383XMxAIDpOIBRBjclCgyAImCOlWfCd9Z+Zum8P27gNGocn8SZj9PPzp76jSbU2zwefH3nD3z8c6lK7cvvbx59fale9ev371768KFFx9fPL17997Lq1d/fP3SdSgI1Gg4i2YlXonTqT7VgxkfQCv2Rry8Xr+TGk8KCKcDSMawfuKmMsKOR+xN9iZC6FH+wjNQQS9VWX2a1MnV8yfOnmU0f7H+uwGV0Z5lc+bMmbMXzr04d+7s2ROYc0B8+uLc2VMv7n37sigcibjCFD3BBfh3nMjOobhexSsxFme/ARB5neVd5/CD2IeKjOir7PvE7zx9/47AI/QCoe/mk/znxUcnLoIL84/n9H+PZ8+ePnf67LkXbM7g/m+eYrHrwsmnTycT/OLll8WUzHQ/kHUCuQL2Khq3pSjpU8oagQCK8PIvussetIk4DONJhqZpSEMk4EduaUO8YETaanMQEjmDEA1qh1I4rrFqop6WE0P8aIYOQrnFg4KDgxAki1McnHRwd1McnASnTM5ZBBd/by+XnF/P3bU6FH48z/t/7r2symbjqHnHsMjVqDuCJYZhFoMFWfb2h/3QyyMXIrHEHFi+YBlL/pGQC8WTySSGJUXXU7OzqVmxq5FsoMFg0BiQcqM0fH9bEzStQI6q9vhjtqo6ecvKWiqTzitTjkLbqIC2xdhT89+bDvMEGBdjhm/VvX0z1Ist+zgiL7sAGmAIrAlTQMIkWKhUWkC6Pmj1dvKWWihy/rRrbTXLTlAhOMlW1jCwCmpVdXHL2qpjlgUPLrHrgCT72JcP7FuZk4nk1Ccu7oAEaKIDKrlSXF6MHlYULLgEa+lIpjTsabfvaMXC42Ld2CFDg+iggpVgsUzNtrOGkb/VhMXiESaZrBVD9ud3T8BKLE7y85MLQE0FEVjgYFcKCRWP79bMYIxl6y07Y9ujt8Xi/uNmfctyKgbF75Ipx6BIiLfbhWK7StE7DkkyTXWgDqqhLtaaH3jHh04y71OvvHEKEgWdQikhE7cEKujWoFxe1XX9iJ6xW7at1/SvXz7cX3mx4ojUdvaFHALAOAwmlKpB5+Z3ZLDAWsGs7ywWbFvVJ+9kl78MCk0VsCsxwYoLFV0QFqVSPPwcS2aeyQcKCVS5tLq6ChdqtVpKLjf40XW23K66w1yxuHLTtGyubVrVqRuOU62LWcwVhQpW02AVFLOoldAhqCaanj1+/4EVASvsEflqRKNReWCCqrywChTKZMBSasqG/cn67hAj5rhFt+Ky64vaWjvftRxLUsRK0sOsFWpeY6F/8tjcByvQWUG3EqChoFsCFYlMoaKz0QZQMzPlVQTTEiEKFTql5JQcGj51t6yK61babcdw267Uv+a2NZepQpBZhmEJlpE12OY1c6/Y51spFJOCT//ultx/YeEWVJEpFGZBJVxQLR3w8MPHgkkZKkprtLNiuIbh0gTGfVc+itisXdfh/O24jmrk2SbkLFb4EuubWn+Pb8V8IeTzxAKHz/89nvUw99iqFPcUTJiYKqFaEi5wTmU8KrB4UE152ezCIYEZLBgaQ1+RRmCooCXMSsXh/+wWVfPOm3f7/TxfZ2AFufCIe2oVGjPhlocVsIsTOFMGqyxYHhVAnnK+Nlq9CrXeffrp69fRcDgcjUYsKK+fPu26KsXFSWwyfhZLfr//vLnX7+frVcFKB984PtGfWBHfLSEKuiVYkiESqgmSx1WrsSjlHnyzaRC9vGDTbFSbbbdatr6gt0Zfe5/uF1W2LNYcSy3+7L/SCmZe06Zu/dGg/wtxSsVsYZeH5WUoVMICTU3IamiIX3vXdcoWlTwswKRDuDkZOnS9boFXFB+uexpLWNU0J7OVmIvFpRB4H89xMelwxSJzEHmSANFvbiHB0g+o8AoJlmgDMhFFceLa9YWJdN8uNA1cWbC/3WybT16ZdIQGloQoTqXTGJacC8fnwsCJacn43HwCp/6NBZUXoj9aTBZQYNU8LMQvmfn1Tgmf/sQKgJE4f6Ucaa197ptsPuY4RCpic/vo8nwauPj8uXAMu9j2iDT5P6zoWJLhZN7hCmIhuJS7dz2qUhDLjxF5DQc/8evD3gvNHJ9EzHn4cPNM53TnbPrMWmJ5e/lqunMivRtOQPVfrNAB1iqaYAlVEAsuRXlwRpB8xwJYAjYOUWxWCJy5PKVvfBYsTInde3hx8dGj7fR2bDO9eyO2vnlubfdGKJFYO7N4MpJG+JiUOg3xNKL0e3lAx5ep0sO4dXwJrKVS7vRlctvIMVkbvnIbx3SQ0CRGe2qX4iv3m0Le1n5+/dzixXg8LboSX55/uHY1felqLDy/eH796t3N3UedTufZs93te+snToeS/EE4OhOdmZUXT7m8hI5ncr/oMreYVqowCk+nU6D3e0urIzipTZhUcDJj0oqhNh1qGzrTQ1rTGGy08amtTQwUjQnGVH3wwUStaBPqi7cYr9FEEoP6ouIlQVFUoj4IRgEjcIAHQIxG125B8fbPTCEnJzlf1157/f+eM1gerrYuv+H768VzYqH40VvaVGA7h0WoCBiJlDMycqEgG7BIKIBGb+HUXLFay0m8lMllVImjMGGZrRqa1mAxO4r5FKn4XLk8UU4XY3zKYTBS8Jb3qmDwkqt6g49cebi7ftIa/McqZsYwi51XC/UXF1n8v3G1laNABbnaqUCONAajq3MeM/qUpJEUsZWVJmw01UNbKMpC2c2Qy5EUYtlsrRgLGm4KonqtfUeB3fX19Y2T6644b/py+ZrzaqFuO48FLoJ0Hg5YSCziLdJ0jHqjGddpkuImRSzfSVPU+TQlo0N3j93GFR4Zm86G7JdIA4HA+u76D6iT1BXCDQKYSHxN/gykDtdpkUGjDYa700PPVXtZMUG0uXARwUiGaox/n9+B9HcsCpmFqzPTOLxeh+Ha3PTw9PSVjOfwkGAdHCe2pVuJXMT7l116zT+42lPsbW0yAtUhO6XryAa1kOVGRCp6jAFJRVDOqDrzO0H6D7VAhUKUemGrwUvsXcOMk2EOiVhHBwPHR28J1w+SQEXG/5sKXKcFGrCdoZ1JRgFEzMlqRpUpgac1FpsFSd8pElodLNj+HNaZWEQtB7hIQAQHqYRfp9UFINfB7g/rh1ceHGyDSrk+eyOw/p+LQIHtDAyitbHgqKQLyZS0GdVYhk/mqhlidfAYAdUDRErTA89rev7RqVEAcyC32jtxUA5ALKfuCK7fBdkonvWT0PWDtelrLn/xzPTXXXPd5S/2XgOoy6/rbbf3U8k6d6cIllmfzGaLmUyyxudEMWl26UPYZ2YrtDLbe4BHm+luusdAGWnK2kOfatURqxtrSLCCEGuwrGUYRsscrt/19QMfHRwdHRwcrR+vXH/9F8Xey69JEiaCBqkcyAcSXnDX3wtcZ0WZDS6Di6KsVlqxSYIqFaVsMVcoqslihuMUl5lsBL1Vb9dYaA3+2rku3bE8qMgaBrtGCFZg4Gi38tjrz3/16I3r64cHBxcPYkPBW17EWZt8gd7eF3t7r+nC2H81obi8F2v5X1hQy+gykjzQYxNqzHYw4NhI9Vi8GpHPKdl0Na0Wa0KuoMp2yuyyG9EUT5nOsIizLgkO2hOMFqvYd+WVzOjuO/e98cLu4frBD+8cTyU23t5Uv3otieKFcnHo248tqWRSFK7y2m+55Lr/0YvSe1Wf3gVVkKB6MyxlNmhgKDs+kBQGvcblEHjRrsjpmXItmymqhq72LsQDwyPhUcGrBgczAaeTwY0aGH5j8rHJ9aMf3rr7nY0H87+ctLZee2hPbCX3YrWx++/88qfvxZIUkMbu+9j2bXDwqktuu/S6S3pJWPwFRxk5Ta6QzVWT1ZivIDosPh/kwkxDE0Y7+h9tRcr3YBda9d32bq/SY25ztbEIl5dQXXLFjIk4vv047xl/5503kKx3vf3sru7tN37duyz27retZKv1zMfz9568viosWxIPV/snp959flNJiT7+qt5L/2JqYxmgCMploH0hoyyFYsWyXEVLTEq1pEi5LAZKjyYANDPdY+8mV9dpamHUanMFyRqah3VgIrdW66ywzOgPSIrdw8PdwMXR/fmd5ffebLX29jLPjL309Ydby60t99De8PTDmo+uukG56uMqLwqDg0HUGRlFEXE6XceoIQRml9VgSCZp3iHlqqVCxlyoVWsGjZW2W3G+/9PxXW2s03iAGxImRkuwcFVMpsjNR0cE6+ajwHDzrZPJ6srvq6vLq7lXnnz4s9UN/Nb0nyRGW2+//lOqpboFgWsNiqIINIARNkrN8rGUzIm0wYcGbSURjx6ID+QoGrKesoh8l3T+6Hq2goTqFKv3ihxkAhcD37MV1uk2jfZ/tfvAA9rDxIXpB6OPbz++/+v26urM0sb2Z5vbm5srD+SXn0rsPfDGZfrJ/iEb/3IIVCmlpQyKQTEJLMrisoUoB5dVhWItIxe9MpfyiZjt9cgMEvBoknQ32QLtOAXUn40aBSqCNRicMEGmtuMrkTxbcbN3vPEq644HjhLjc/NvbHy2sb+//+vm5sO/vvXZ6urG3m+FwH2fD42v3PzZ5sM7fOLj24UUKnlFK5VSUkowSMnZXLYo1iTByhtdlEPDKQ5bTCzI6VoqJqlCl9GFpXVZNECi6DbQKdUZFqjEIKUjWJDKOczmKyzKNJDvH1isBBJDw0OTx4+v7B/vb25vzxzfs72/f3H7gZWVR37sezsxNL733OzUlUuq0AKWsveJQn4oCsXTdJK8aOYdXKyYyxaUajYnSg6bxuCzWSxVLlNL56QSz/G+pBHZD3+dNWn43eHwkSwNiaEEpAKYx+3M5/OVSIRtsI18PuKp6IZGhmd/e6sJuWr7vzzy48X93347vmz05otvb7Bv1Tc285M3MrrV7e0WuFrfvPyBkFJwURqBV5NZqZjL+ThZoHmMqT5JTEnZciGWKaSSMdGMNuD1xkJyYaJYLXKxHkfSQHVdS9o0YssbRIkZQgW1tFFnJJ9nIxFPJNKIgy4RHwmPhCfml+b3twvPzTx98a3fdg/2H3D77/tuY2flLef4xmaiL/H79sLecqvVeuLT5etbItdqUbVaymcxkHGUV2yiUixkCpIUk7mi4gIORwtqLV3Nlgoxkevh7AZHUFJktWAnmfVn4xkUH9G2uUxuJwusfDw+4IkDi3UCa3h4KDw/P79VLZVmmrPNzz777fiCdizw3cHK8dqv+bd/depWVjcGFraWV1tw3bvc9eCjDDQkitUy1WI2FpMFcxJx4RJE2culi6VqriZzWbzz7eoKpUJCMRMrczIvGTTdOPOc7UOUUedpY3lMxPGRyGL8wkCjkY9qmUR4ZGQoPNdcevi5dBpYc+GFj9Xj44G1yxYv3nN88OOvlc2jmy+uXjTFV1Y3l1snJ63llgCsnKrGYj5fyIW1MgpcJiWn01Up45UUXwgHbo3Mc0VpRp6upTnJYRBDXkFI5ZDz7RGwAwW1OtbyRytuYMUhVDRSx0clEAiPDIeHx2bnZ7bS6Ynp5sJIdHJ/55f+my8w93wW2N44Hp8aC+gePmL9+V+2l5e39ggVsCCOmORVSS6mS3IuJ6ZkzDacL8RJWSldrFZjMnBcPnNPMuWd4dM1PiZ77V2dhngmlljS6pwmp9vjZDyweyS+2BhwzzUW6/mAMxwH2NTk/Ey5VJ6eh1rx+mSjHon2jwaGbs5vbm78fhgwMf1sxLSIwN1YxcfycovKZquxWMyCsHLpzbTNInOZbCwdq6pySnGgKdEUzmeFklxSMqrXiwbQzdMICYjlaDfEdmo94tFptR4PItXDEqxG/QKexUg4wcbD4aHh2cnm1nPPlXd2muF4f7zRiDhH3TrMsr9srq6uoG2xFae7sgWcbTQA4n1MKyG9RpE5lSvWnisX+Pb/8Lg0ITMk5EtVvqSmZMXHYU+kujJqKV3L4pSPzkOwCBWJLWtAa9Jq3W50H7aNVa+HFxqwvBuOh1h3jM1ubU2UZzZ2ZucakYV6nHWOmtw6RlfZWz6pjLrzLKTO74mbreu/5UAHtQwYYGgj3X4PYrHqQ+g85Ca9B3GW0huTnCoLVfhfyPE87+qC/U+tBSxQoSQmYAJYAGqx+TZWI7xQB5YnMYLqH5ubWtqZKJd3mrPx/vACcq3C+E0JJsDUTiqRmyuIFL/7wl6wptl7MpE0WloCJfhoG2KcTIFW3FYzjX5oNFCgtQKYRraToQat3KEoNS5bSMeCZ29q4CxwDQ5W3SYsBNPv0VbygIpCrfpcPByJMoFwFC6H5XcemZjYWZkNh+v1eIXNs05dX2JqtDJXYRiPNprHH5WDlrTs93gSCWaMo3xZVa0WCrzCyUabkbzk0qAsQDIDSkOhR9tplB0tx253GM12RUNDrDMsiHX1lJvR6rRIUxapFY2PA6sRjsfjUW1iYWFt7Q5QzU9PTMyvbKyFFxYjfrZR0encDPEUFPO4TWiji+4iRB/weEy4TZQqmC0YQWmBEwtlLBYvy7LNx4dcBMpKPnpoO0qDkz7VbaewehQ24ikWoLyYlyGVTst4xpgIO3BhPD5eX6iHG8AKRBYXhu4bHmo256dnJpa+m52D6WYrprhTxzC6QGSALKRbq43kPYtbk2N9To9Wa2JMJjeVFCS5nC2l+ZwQommXT29TsmKOS5cLKqeGODMmaXPnKG0nn3a6Cz/PqXWVeBUfYMnwx7iZfH5g4Mr4OLDaekUT0bm4OxquE6yl6UeazYVovbGoG0XGAayv3qcLBPxk6fO6/OwsWiq4EIB9HiojSZYUZnlDilequRzCPiuEePJKK0Pzcm5mIp0uxwQl5NXo6R6gUQQO50MU4jSIgTlYdmud+Fc8d1QGUPErx++ZW1gIhyORfCAajY6MkJBfmp+eXtmZq//4Yz2CfQdxAwH4CvuWGcUGNpkqU36TFoVf8R0pW4oXsiV+ooija4oGX8ggyHwaB4p0ludkxWUxC7Ii1wCnCj09Xd0drK6rIVc7H3q7xt0eLZkC76jE430DFy6cYkWjpkS/P+rvD8/NLi3NTM8jHr6ra/3OCBuPMvBWoFHPVzz4RmEGfctvamOZ0FmBFatyyaSehtGLgpqplkvpdDYUMpKX9bxPVdIz1ZIq8EmkhSFm1sBVoOpgncZWr5WBWibGGRjOYxHjoALWXDg84ncG2ljDwJqcXppfG/ou7Gc9WlMFPTwQ0DUW82Q2czIs43a6GQ9UOi0PpffJyWxafa6IrE9xxqTLbONthdxECfJIWW8XBumsLEvpmVIVw4ad7qZQwIJWKHLqyWqhlhNGHYnEpwauvDB+5T2zdTSZcH/C6XdH+y+7LAy1HpleWmoOR6JRt9sERdy6cAVUrKnO6jxRrS6Cvaw7h5WTi0qIxhHHIhilAl8rqUqOFy2YIjScoKqlzEyVz8k4A7m6uWC2C0goeAstsdMRkxN9JpMOkR3FhNV3IfrAxR935mYJViOhc/v90X7MgfOTS0uzzdlwtJ/VmlhIw9ajCFUWj3Ouvljxm/o82jO18AtlEWxcMZtOYytykhlRoaHFbChXmpgoSpKg0RtdNr1S4GoTxWkVh8Y2FrF8eyMSLvOwx6QFlofND+BMPb62dnFtpRlGRRI6P7D8I0Oz84883pydDY9Eo572ErL1RTaCjhBAN2TzYehzCuUhD9TCK+VsElq4NAon1srTUpnjFA6nIFpRJBwanysXM0osacO7VQEx2rY7eTA/dDqiI9H5gszY4uL4wJVrDzy49vjadzsj4TAbMPnd/v7+kbFmc2pyqtn8bsHtd2vZiNPJNghUPuKsoGclJkufvh8406pP2+fp+4Nu8w9ptI7j+LMfXp0+rnXuWeyh6RgrcjyyxhZMRhtjc2xsbqUDi7VEqGjaRm0qpcOyiygodOZaDcPqSlOq+bM6u1QuRKPflpxep6JBScURdn8cHVTv7/M81yzqs90z+iN43fvzft7fz/f7PEdJffrGiCcYtbqsemWjslKlMGvCnXFreyQc8SstwFMaLfpYLBGJea65+fprSGaVxgdwRcQR0NExNHRH3e5u4bkX8y/mCw6bu8rAsLSOZe2F/HA6lSr0590OtRZTdRWNi5YM/bTckA1dd9uN56/cLadFpdTqmhoqHG62eCoqjkv8ehwoWaPBZo8VezbsYi3mZr0+0xxrC1t95VjLuZBLj4DAB1Q8loa7+VYuWlYjIxkoq13p39u7uLBw8eJ6Pl+wO2wIcBQCwhRIpwOFwrCbZRk1FigsPYDSahFc8tfILvr7ty9NymtlNEECFLAq/B7O2mVsjiaMeovCp1KdsPqwZUSKIkSbj1No5nWNkVgmaLVGPObrKBGLnwE5DilLq+ELglXjXljpf/y55y6ur68Pm9BEg4GhHf0O5GkgEEgHAogMhgz79R2MXE6oqmSGzx966Mabvh+5f+mFkzIaPGJR1pDFr4GVKE4RCscQopGE3mJRHVdKPB5zczgeiXVa9XgmdOI6/bFgc7QCUKASsMiBm8bLUxFTuOuQWc99tP71+nqexyqjWUeLFneiyRQwmWwES01rwaOFuzrwfxlS35M6fXh4ZemD1obWmppaUS2JJhzqTOCcLeTxKCilSiq1WJs90CputJA1SMr5Qv729lj8nmvvqbwWVIBCCfHAcTeHyxgRS13rvvPxZz66uH5qfT4PBqeXgcMbWF21PQ0qu8PhhloyWB4NRK5jtX5/+/T5C2+/8vb+xP7S5AcffNCqJlAMsLCR8ftVHGW0WMzBRFu4zWVVKpQVxxWc1eVqy+jxNEPvw4ZNIyXjA+ZlwsWTaTTA4rK0miZMoKq7885nnvvo4qkz8wgIu6nK4IblW2V5CGUClt2hY6BWGU2iXS6nMUPs7B8e7pPPpalPXzhLsFgIVltXS2E9NpuzwZAnpDeTwxGzxmhOZKKeoLGZO34DR/kxYsTbM8ZOo9nSeB0/Lp/gsTSQi/NVGkCFwl9TxFofPDOfHw6Y7MCqp1uH9uTDbpgeYulID9VVWkBpDTKvt/W9W/b3L00sLU0U5yZyubPdJ2tra/DBlQqH/OTwodzIxcyZaELvMioliAmpIuQa9wXjbTEuLC0vl7p8kWCskzvBOwtfaAVrQS4v1kMeC8vO448/89zFM2cG5z8bDtjs3ipnq2FvuCHvvPtuiMVjMaByagmY6fLI5S/uBdbSJ7ncJ7lL32xNgYsVsOqQ8hZ91hWLmJt9ZmilMLoSrmC8vZGzhhRYr0N6vTGe1bchHCwq47HrCRU+vFhIeV8cC4mgliDWiy9+/SOPZbcbZLqWYdq2wOT39gqkhSyLAKCJ4Z1M6vXP39i+culwv7iVQ20VNyZyhKu7DlQnuymM6cdVCiWiKmaNB61Blx8RSs4czK54W1u0jfLB+FKLRu/qdEVJagFJcBYRS5NFBqJI3NxBDH/q6zODBKvwOGugOwJO7IF2Dw5asbPWOepIaiEYMG7Y8Wb39rNPXjkkYk1NffJJcaO4lMtNTuaqT+pOnn2BIrucCv5xEyJTauH0iTiGB5/LZZZyKkUFaBKJRLhZb8Yhoe8E9mIiFsTibvaVG2gRq4aI9dGLBCtDsGwMUoux9dv693bZbhyP2Fkdo0aYYkGsoV8fef7yCNS6NPHJ1NRUbiu3sVjcWtpaWlr69NPJyU+XKPJch9/igAznbPg5Xq7wc53mNmt7IhLVc9dWVh5rNEbaQrHgCcmJqwGhIVi3+vRILdHwsBZ6CCpBLZMcS09V/0r/7nC1zXZHtRtc4ERooYmm1y5sj2w/ezuchdZN5XJTxcXZua25OfyZmJjb2oJapHAFIKD4T+UJXLFz1Hg4v4WSKrAQXl/RqLjBiBaieCoNuRMtCVpoInzKR+kpGP7Hwa4UgsorZzqw/ekfbnVW6+x36pxum1PNaGnEvC37+vbl7ZGn7yJYZ89OTZ09u7W4WATVBPkUi0XACCUplRRfsSiKTO8o4YoWKpWit8iNeCzNqPnMAhbEQg+BNZj5LIUNq8FA19vq3Q7MgTa2WqfDVC+vd2tprbsj8PmH518aefbVR++9gh5CrQ+mli7NzG7OkdrcXHyqj2jEf0Ui4UKARKyjj56oa0pY/Ip4rVdGsK72EM76enBwPPMZ1r9hg7zM7WTwcTjyJrTP6WzZW6jHQu3ucLxxYeTp96bSDwuGJ54vLk5Pz26ifxObc7N905So1NESgQS9SlhI0hKWhlD59IaStdBDYvgffxyf/yxtKhQMcjABBmuOTmfL5+sZGqeD2N067emX7n/54xfGO65MiFhLoDo8XCwWN4laxb7l/8OiRDBgiSXODsAqOX4cVCUsPh1wMhP9LB1Id8gZbBHrSRdZt87U4madLUNaGsVWp/DCz1u/rzz28RJCAWQwPFah5PSswLUx20RV4v6rxJMAngaPwYQmUiVziYWtBT/Dg0zAwldhEuOB9JAXC85KjGe60oFhr1YLrBW328HAVkMHBbZuqL+uCgdhzN3dz38V/r1ffhnxkMuhcbnizPTy1jfA2tjY3Nzc2OijEpGgqpEr919bKaFIfgFNIhL9EwvFIxEqMeTLvVVCE0s9RDxEo1lgGToW0MIhHCdhbDbZsEMb2t2tYzDrtH4ecH35c97W/R2wPsnNzRWLG4vTA5NnRxcXf/pp5qeffhodpaztLrzVEDeHzXrVdY2VUgWeZ4pc/8Yi3rqa8fywFcLeTnT8HVezFJbvysJb3qEVltGtDBUYYJ002Vjd0O6QrIqlu7/Ce/CeYOrNB1b3NyY+2Vqc3Rxdm5lZ7HtqZm1gYG1mbW0GWHqPJ9yZDaoy2bagJhwMKs2q8vL/UIs3FqjE4rEyjAxYtHgfwlpfnzkzPp7Jpkwmt2GoBRNz/wJLqpoMW4hW2mlPvX7Z9ZsL/4zug9Wx2dm5icXFzdmZmZm1Dag0szY6AEL8UEEVObj1dZp9wfbmWCgUjsbG4wogiSVqxVeJC1AaX7mpBlqVeiik1iB6mMbSY2MwHjvKGCcKq3R9/cLKiqPB8e3INt7Ce+nZJz7uGVtcnu1Ljjb1TI+idxszMz+tra2NjpILFQ23dzXqO7G9x+BsMYZiMXssgtsAQMJHqKNYGsHynNKL/hFrkYgnC8+pQcQWeR/HNFwlr2e0Tl0ZC8l0Olbn1A2tDK0UvHQUWOdRb92/unNpbGdseqCpdwACzaB1QJrhyfooY1e7Lx7vjMfajcGIpYLC/lXTeJ1CKtZ/YEErUHE3+MJVankNwSpF/NfzsBbB8sq1WP9YmiFqsTpg9a+srOz+/vuPl7fPXzh/+sLh+dOrTWM9h2szySaADDQlk8kB1Cj+YzmJjavSaPaH2+3RdqurfTw6blQ1w/L/r5ZoLHBF1TLxRqy7A2MpDE96mMmk0umCt0rGaOEuFHK+GqFla+nfOzg4iGN8P436DnV69ZGesV50cCDZ29SUHEgSNB6RijVrLKqIX6XESXw8EsdTilA0qpJc+7dQCsUxAUiYl0UqYEnUAhQ/1GDlIdPDmcHxaFcaC7VBTjd00AwUY2AtKIZz3l1g7X21+sjpRx4RuAD2SC9w0MYB/KKAtZwEIdWY9oe6YiqrHxuNctgrGLKG28oVApXIRYQSorSUDr4bNKWhhljrFHoItXC8lgoEdAa1tgxINNZAh40FlrseWHufvfH8F6tHqXoA1NMDEILVhCKX3ibKaramYpHIeDQcdyRiCWPFcaO0HE8OpSUofI7hUroNBa4IDC+IRayFMD01iIry+SA3lFV55a0NOH6vd9MsFkd3S//CwmdvvPvuFzurq1epVnubRpPA6hULQLigKGklXjbgjNZYMBE2hsfbol1Rj1VCSUsxKqiFErUCloaQZWvAVOrhRwRrfj7alTWlAl7DwR9//P77wYK8zKY9yaDwIK9/+N0H3hi5cAFt5LGg2SNEKYEIP+QrqEZ1BWNZzqgqx1Dqw5OfRMqo71JWUmITFSiKqMVzKY9aSyUXl2myueBvRHBBLGR8IG+QD+UB9sevf/6wp5PVOWUsDr8KD6Y+f/5tYPUACAU6YvkkUAjaGJgg1LnkuXNJKpgJBsczGT0meileJ1CV610Q6++CUnz/SkmqgVYojcUrLtOCtXis+Xmeyl4wGKoYkHU4WNv8Lz8cyBtaFlZsgTffuPzhKxdWVyEXPlCKr94BoX9jY9ApeW55evncOUqqwVtSnV2SkEQKR0kwWKGDEgFJxDpKpYFYvF6WuFotGh5nbc/gRuSxuojjTYwBZ44M3YHpT0Y3sMMHv9iH+k1vZl//8IsvdsYIF6qnd0zEGh1IAmpsB2zJ5b533nkHWNIKCd4N5FLeCglO3Sn+9J23luIo1tWAB5ZQyhTNU8lqxR4SLFBlcR/C8TR5SlGjpp0NTIOT0VXrCm7Tm6b37vtiBzXWw2P1jOEPsBCiRCs0EGpN971zjqiFwkTT3OiHWAQJhatYwtSgPCY4Syn2kFS5AYs0aSHGeBELBSqIFfBWIRtQZTSDX4S8Xcc67r77/Qf2eagmwoMv2AgWIhRqLSfRviSQeCz+pXOg4Q8fC2QzcSTbj0Guv7GumovjNJzRK2JBrcdxqkWwXjyFFgLL5DXQYgGLYXHExVSfvDv95uTH+9PoIeFBLOAH37Gm5Npa33TT9HRfX99TpIXgooR3JSulEtgKdEQrHujI3KAo+R1MKHD5Eqy8TjA8Pz7A8gDLZlNwvMlhMAhaQSmeDKcP1Q3dH3S/8OT+/iGwwJMEFV9Qi3Rxua9vGljgAhXBqkThfVMJGRtKcaVAkU2FAn3k1QKSeCCigVjSAM5eBaw63lsE68VsFke3JjuDc0BCAyRBLx2NWaK6uvuxydyVj3fGxnp2lpt4g53muwhX7RCteKy+twQssfh/DUJaKhjrqtMVaN6RrYVYnMSLJKWZGoLF58NzoPqrkPN5aeyK4vgzk0ybSXymY5KSwDghZFOxlGAWLQFLmCQYxhinBoqkkrpMioWqCdhG2yaBKbRQxE67nF39UYp1HFC6UGOCRV2KMLPpH9Blt930c+57iW+Y/vi+5Okwi/nwPefdd+69587C91CR8f6I3wygElUqpWBoLPQuwfTFvxbHPvnxEx5HBBT67FisEqyff94kjD0s5vxItU4yu5YEI3o6VKbA6lFJahGmG26fv4v1jdi1KCLjzdQysn4omIJobOzdOzJBg+6Lv7r5BRlUVA7vEUOQ+J6vAmbBAqlfbgoLDeCbDBLweCSEYEHV5RovA6VWht8wsQTMoFIZ7+BSohBMqTqQbRWogsX9R82Pf8cpZZUM8lLQ7IIFV/P8/LzZ3NzsYbEbbPS+DogEq4sGGVQWrBE+rhCJ5VOPohq2vlJgQnU//taYuOUwsfgBFfLd4fIViyc7h833fvxNYvjjpzJYkfHHu7u7TUUF1jlcPSx1QyqSyKAzz4uRXNeZxYT6tittvhDf/PXXd1hB+hyvvsEtxRWyu4PwGEEk30ESyb14enL2bG/vWxVGoMwS63gVKSoF1m5rA+KQBYt7D+v6JJuNbNNv9uwanY4oLMwavPcDa5OYRdbfB4og+iLu1KkRRm7BIECCKFCnB7+cPd25erL7Hs+jCiBe4ZYkFkCXqHN+CZYgwMXFx4ygiQWvCcUOuibSCaWsPgRq/kG16v3G3btT9wghAxdkQAlWJOJ37ANkkCmv3ErF4sEJWE+f7VEmCxVYMD1mJD3c2wOpddlqtQBra2rX3uCxUplude2yMfibhY48ka6xQYfC4kF88ODzB9+IXV8JknzTdGucMn+2u7nxckT8QKnTg5OTR2fPdw6fPP5Ysur4W17TjxnkV88FawsqEW5pN2X1SHP1C4rVMYisspH8mhJkupFaguWfEi6goEIyxqcHP7rhDjJDJO1Nqa09uA4OWKDBrUPeNj/+rrAeM9fZPbzau9zaqtdh4tZp076pabSN4JlQCZryqZdX4JlU11i385SAvTVTNqfJLswy3IqPUWvdcYtZyARTXYPiFmtsR1vPdq6aYL13DBRze2b6h+d7WysrdSWwNrXaxkR4UmOEp6wRk7puWX3iAxVYckO2mrn7JOODwuJl/dVbht4eo+9UZhd0Rji6VgGFdaQ8ufV8awe3jgmhYD1Bq4c8hZcrSKhW6mB5ksnS/MZkLJZxdkcG9RGeXsKTWhYszWm3W7EeCFaXivX4yJd3JJ3shlXgOAQLxhR2Cdbe1WHz5z93j9U0+g/MAuvwvH6huLh1OlSi9GRkkrPhUjmRG7VptwaoC1+lJZeOFikLBUnANEsJFkjbhWnQD5VyS8C++4qeSajIeBoJ2AATHh9oJJVwScqnimIXbu1dre4eS4Ul60arl81DsAy7hKzT0uYKhUpM99L6PTo8PV/IbcToInPaqOz1gQEdaLisVK+yNJ+n6QMudxcLKLC+iQsUmyqRO/fuvc9fu9ksFyyR3eQ6PXn0nNwCq7lLFFef/HG4urrVFJ2DpNTCLW9fNJpYrJWTw6O2ProNwtnC2uwGvWROG803mGXFMiqxvgW/oupiYRZg98Wq+NDbY2m7w+5jpXTQfe9dekCESbAU2Gn1l0dnW1vPnu1dXTXx6/HhFTydnzc3N5sqiojHsaNNBtg86XOFJ+dL4dF8IkPTVF84FqiUSvPZZMyr3NIsWDS6eWkRGVS1qZnxAkYHIGKhm+1nNWTB5WPGr7BMORoHByfbF8+PnoLFUiSDO1i8mbk2m5uX6w8frvCpg7U2nEtshLMEzem6NXl7bbYSLehedtI9iY35hcKtHpBZsjK/zqSvhwe4FNbU55JYQ2BFBiMOUS/f7T0V96vLJxdHvH52SK89wte82mueU4+C1d7swCTCLo3jT67ocGVpLZa30fFgyyZspcLC9FLO66R7PtoHlpWLhB8psVBjCCqwEFGcAguqUBoqJYF6EatRrW6f1Y/OjraeCtZec3eVsb3VFi7Kv079QqjWGSG0SnbOxWmLkcz0bGV+cm6YzRTaf2aHZ9dqYZt1hUSkjoW4FqAit5CYBZbiYmsOs4JBKbasslvcOmj8snLx6AKsI9lCYb2Uwb3eIoxQtTuti4cXYBFGDveEF2Lzw0mPTvMirUi1cI7dTM6VjYbHzeVTi6T08rKzCRZfCWIPS5oAke9lrB7Zwendg/3l7fWzs+fPj3Z2tvbOm5etemvlsg3VJlwkPFSQaTSeBmwJrCrR1KxxQmo0MbwwW8i9lh24bcMurfuKFrOQR4+lBcphJBdBNMDGHgzBFQy6HQTxZayIYKXYvK9WSfr1izNjz6lVl4Fq61JSq91ut8BCYNGSG+W4Cg2ThYXJUjI80qe7vOVwZqk8n2PJUjOlc2lqdhaYgGcQ9bBMw0KqCrUjK5TVrRTj6QH5xW7mmewebhlDAruInXYbu8iuuri1sq5FR0sbpRKN3qw493O0NLdYiM6N25wM8lH27HpYIjUDcr4Fj9Q13VmiSFEpLnagXnKrywVVoyGDBC/siws+K+sP+bC1edHqqDC26njFKKFNS4NbdKJcm4/mAyOMEp7h6XChUJpLeKVh0eIWRT3SbWk/VA6oFBZcBphBRWq9jHXD5BKqIoYdyISRvc2TdYxbXz8iqDx9GIZdkvQrK1pidm54ks70gQznOJei4XBMNmKz+dhcoZzLGms3yimksALTFT9pbZTyJhUKmW7RXO2wyh3yXQ+nxaJg8UBW9wE6qS6j7XWMW394sdJR2UUJgYGad4P+Ixa/R6KcHYjOTsxmJgrZjEvrd2XDcxmPbnrFBZbauHvd49Xzlak0w4PEsMsVVLobGbxjpaLoUm/qnl0pZVl1/5ftk4PqzPLyzPK6CK56p9PudASLlA/Tr9JPL2wtzxAa4OSWLZmtlSqJ3LhGCdbnecEtXbC0EaaOunc8X7ibhmvKdMvA4vCKmlr0JI+HDzTDrlQjhWPVoSJGVRuNoZmZ+IzEcX2bLOuIsIvs0qZLFXppOBQ/wrkH+pCSel+Wt+L4cC1BZnlsPbfMRUGQwPR4Ap4AZ15ya3cjbyowAiiiVdct6sWQV7pEMWJipVINVCxWh6oHjSFRtTqzjbCr1fpLvFIpzzM4sVTL5zOc6cnqmVypcmtuYdQ2fptjeCaTme6YBY9Vurg2Mr/mt/Mgjr0B2JuRyI07fkAc0v/G3Ue6W+QAa4j8Eq6hGaDiwWBDpRixrCPGLJEWy2pOLVtJLK45J+e9Mc2bcSXz5XC5lh3vbRgIGkZZsKxous0bnrgfCY5JetGi7Jd5DrUoDyDyv4CVQo0qbjXEJsF6k/TkV0l9Nb7jG4xaorCUDdDs5hrNFabL2lpy1OW5FeibTBSS8692sUitf8MSqZOpiVrQLlg+N0YFQ3iFW6BZhlMeRYVVbYRU+GbiQ/HQ1NQbIXJMuADbXt5fRpzFWvIsLE0uDb9Ouiczs4nKUjnn1VnwCo/2gmh1i+yyikUTqHQVz0Dpvj3tI4iDFIK+l97VYEr8iF0jFAKlOjMzFAcP8SswpBhPgsSUvbp+Tx+N8IWJjXA0yTm3ZD6c7+9tVlv2V8Dy/LN0U/CNhedqY+m0TO5vIOVX5DqzzPEhaKAsQxiP87AoRmigAnUGrGQtN61xyn0gnFwaL5SmS15npp+JhxVLuP4NCxQTS6PyH4k4Xxlw9mdm13xp1sD95svHEkSHGlHBgUuwZvhiHcIwqKryy4xmyywl6OUsjDvHXbZYorS0kJub1r3GO9pKJVj/QYVsuj4a/1D+J5mbGhuCyfKanXm/cJlggwzzjiIKhqBCgmBGEjIrFuW6c3yYwmauPOnhgOn4SDSzuFGe1KHh+z9u6RYuCfxS5acPaCKUlvpXtdscUJ0ux9Nph6lBR6roSCG3j2Q3qBBxFMficbjEPIKrzW3Mzb5GvXBzdH5jrVzzlmOcL9XDrxtxMS9TBsiLuqaCK1DJfYC6p9TlyzH3zOwCtvkxDqyUWtxMMWiF6AiCCQ5RSBBJeNOtTI6O5Y18NNrHuc5srD+3tjFMPWP88zevs/kmF3/+R/WCOLKYsWDhMDcb3NTh+cKiI4JVCsudMlBwCSyK7V5u7UPJb38DZ61kQZG/KcoAAAAASUVORK5CYII="/>
+										</td>
+										<td style="border: none;">
+											<img width="130" style="max-width: 130px" src="data:image/png;base64,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"/>
+										</td>
+									</tr>
+									<tr>
+										<td style="border: none;">
+											<a style="font-size: 24px; text-decoration: underline; color: #F15958" href="https://www.life-framer.com/past-editions/">The Annual</a>
+										</td>
+										<td style="border: none;">
+											<a style="font-size: 24px; text-decoration: underline; color: #F15958" href="https://www.life-framer.com/collection/">The Collection</a>
+										</td>
+									</tr>
+									<tr>
+										<td style="border: none;">
+											Our photobook, celebrating the award.
+										</td>
+										<td style="border: none;">
+											Inspiring stories from our community.
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr style="">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4">
+								<a href="https://www.facebook.com/lifeframer"><img  style="margin-left: 0px; margin-right: 10px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAYHAwj/xAApEAABAwIDBwUBAAAAAAAAAAABAAIDBAUGBxESITE1NnF0ExRBscJh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APWqlszLlUW/DoFLI6KSeUR7bToQ3Qk6H44KpWM4xv1yuNZPQVUrHQQVD/TAYARoSBv7IONgw7d7wz3lJC2SJsuy5zpANTuJ491tbdzQP4sXwziG724xW6hmYyKWYah0YJ1cQOJW0oCIiAonN/kdJ5H5KtlEZv8AI6TyPyUHfKXpmTyXfTVYKPyl6ak8l301WCAiIg//2Q==" /></a>
+								<a href="https://twitter.com/LifeFramer"><img style="margin-left: 10px; margin-right: 10px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGwAAAwACAwAAAAAAAAAAAAAAAAYHAQMEBQj/xAAqEAACAQQABQMEAwEAAAAAAAABAgMABAURBgcSITETUWFicYGhQUORsv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD1BBnsfLnbjDNJ6dzFrpDdhJsb7fI34rtakXMz0k4pleKOWGbSlyddLdhplP6/FacZxvn7KMRG4S6QDQFwvUR+QQT+TQMXEfMGW2yEltiraCRImKtLNs9RHnQBHauTheP4730baayWK6dtMxkCxAe433J+kb371MXYu7MR3Y7pu5U2yz8SPK8ausMJYFhvpbYAI+fNBVwdjYB7/FFZooFXmPhpsnjFms7OG4uYvOwfU6fpII39jvzUluIZoJmhnieKRezI6lSPuDVk4ixGdvFYY7iCS3Rv6mjUf46gMP3ScvLnMvKWmvrHRO2YO7H/AJFAkgEnQGyar3LjBviMQZrlOm6uiGZSO6KPAPz/ADWeGuC8biJVuZWN5dKdq7rpUPuF9/k7pooCiiig/9k="/></a>
+								<a href="https://www.instagram.com/life_framer"><img style="margin-left: 10px; margin-right: 0px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGgAAAwADAQAAAAAAAAAAAAAAAAQFAgMGB//EADEQAAEDAwEGAgkFAAAAAAAAAAECAwQABREGBxMhMUFRFdISFCREgaKyweEiMmFxgv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD3+7v3LUepX7HAmLhQog9odR+5Z7fbH8Gtg2dWXmuXcFK6kuJ8tGgRnUOo1k8fWsfMulXmZWsdRTYrkt2PaYK92UNnBcVn8HnyoGVbPbAGysyp4SkZKg6jgB/mocaUbI0Ltp+7SJ1raeDUiO+CCnPXtx7gCn75p5zS0fxmxTHwlojfsuqBStJOOgGefI0/qVqCdnciRAitRmpCG3vQQkDiVJPGg65h1DzDbzZyhxIUk9wRkUVGsLqvA4HH3Zv6RRQSdAkjUOo0EYPrWfmXSrz0rR2oZspyI7ItM5W8K2xktqz+Tzxmt12YuenNSv3y3w1zYUse0tN59JJ7/fP9isztGsoGFw7iFdRu0eagTveoXdVMeC2GFIUl5Q37zqcBCc56E4+NVtZxkQNn70NBKktNNtg98KSM0qNotjAwIlwA7BtHmpO5TrhrQtW63wH41t3gW9IeGMgdO3wBNB0dhbX4HA/T7s39Ioqyw0hlhtlsYQ2kJSOwAwKKD//Z"/></a>
+							</td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4"><a style="color: #9C9C9C; text-decoration: underline" href="https://www.life-framer.com/login/">www.life-framer.com</td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4"><p style="color: #9C9C9C;">&copy; Life Framer '.date('Y').'. All rights reserved.</p></td>
+						</tr>
+						<tr style="background-color: #f1f1f1;">
+							<td style="border: none;" colspan="4" height="20"><br></td>
+						</tr>
+					</tbody>
+				</table>
+			</body>
+		</html>';
+	wp_mail($to, $subject, $content, $mail_headers);
+}

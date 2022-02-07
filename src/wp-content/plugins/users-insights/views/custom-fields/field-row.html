@@ -1,0 +1,31 @@
+<td ng-if="!editing">
+	<span>{{field.name}}</span>
+</td>
+<td ng-if="!editing">
+	<span>{{field.key}}</span>
+</td>
+<td ng-if="!editing">
+	<span>{{getTypeName(field.type)}}</span>
+</td>
+
+<td ng-if="editing" colspan="3">
+	<usin-field-form field="field" mode="edit"></usin-field-form>
+</td>
+
+<td class="usin-table-actions">
+	
+	<div class="usin-action-wrapper">
+		<div class="usin-btn-edit usin-icon-edit" ng-click="toggleEdit()" ng-show="!editing">
+			<md-tooltip md-direction="top">{{strings.edit}}</md-tooltip>
+		</div>
+		<span class="usin-btn-delete usin-icon-delete" usin-confirmed-click="deleteField()" usin-confirm-click="{{strings.areYouSure}}" ng-show="!editing">
+			<md-tooltip md-direction="top">{{strings.delete}}</md-tooltip>
+		</span>
+		<div class="usin-btn-apply usin-icon-apply" ng-click="updateField()" ng-show="editing">
+			<md-tooltip md-direction="top">{{strings.saveChanges}}</md-tooltip>
+		</div>
+		<span class="usin-icon-simple-loading alignright" ng-show="loading"></span>
+		<div class="usin-error" ng-if="errorMsg">{{errorMsg}}</div>
+	</div>
+	
+</td>

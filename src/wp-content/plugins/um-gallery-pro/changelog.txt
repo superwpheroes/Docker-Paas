@@ -1,0 +1,134 @@
+== 09/27/2016 ==
+Fix: Refactored code
+Fix: Right section
+Fix: Remove Add Album from displaying on other user profile
+Fix: Changed from page reload on album save
+Fix: Made compatible with UM Reorder Tabs
+Added: Ability to view newly created albums immediately
+Added: Integrated with UM Activity
+== 1.0.7 ==
+Fixed Uploaded images incorrect orientation
+Fixed URL in album shortcode not going to owner album
+== 1.0.7.1 ==
+Added video gallery option
+Fixed issue with themes and plugins using Magnific popup
+== 1.0.7.2 ==
+Integrated Ultimate Member Appearance colors in plugin
+Added Vimeo as video option
+Fixed video thumbnails not appearing on album thumbnail
+General style clean up
+== 1.0.7.3 ==
+Fixed styling on album grid
+Removed print_r from debugging
+Loaded video thumbnail after album creation
+Fixed issue with Youtube shortlinks not working
+== 1.0.7.4 ==
+Ultimate Member 1.3.81 compatibility tests
+Integrated comments system to photos
+== 1.0.7.5 ==
+Added option to customize labels
+Added option change profile tab and slug
+== 1.0.7.6 ==
+Increased admin list to 20 from 5
+Moved some settings to layout tab
+Fixed issue with plugin updater
+== 1.0.7.7 ==
+Fixed Allowed Roles setting not restricting user access
+== 1.0.7.8 ==
+Fixed albums displaying multiple times after save
+Made plugin multisite ready
+== 1.0.7.9 ==
+Changed new gallery to prepend to list-style
+Added AJAX animation during save
+Removed images and videos after album update
+Fixed images not deleting from server
+Fixed image not displaying after deletion in lightbox
+Fixed broken image after new image insert
+Fixed issue with deleting albums from admin.
+== 1.0.7.9.1 ==
+Fixed issue with hiding recent photos from main profile tab
+Fixed issue with translatable language files not working
+Added Advanced tab and database repair button
+Updated CMB2
+Restructured settings panel
+== 1.0.8 ==
+Fixed issue with images always appearing on main tab.
+Fixed issue with admin list error in PHP7
+Fixed albums not appearing immediately after update/create
+Added fullscreen feature
+== 1.0.8.1 ==
+Fixed issue with admin list
+== 1.0.8.2 ==
+Added option to turn off fullscreen feature
+Added new styles for plugin on mobile screens
+Added option to close modal after album update
+== 1.0.8.3 ==
+Added username as [um_gallery_albums] attribute
+Updated .pot translation file
+== 1.0.8.4.2 ==
+Added Tags
+Added Categories
+Added admin photo edit option
+Added new shortcode for Masonry
+Fixed issue with comment form not loading
+Fixed typos in language file
+== 1.0.8.4.5 ==
+Fixed Styling
+== 1.0.9 ==
+New: Better licensing message
+New: Made thumbnails equal height
+New: Integration with UM Meet Me plugin introduced
+Updated: Update Libraries 
+Fixed: License not activating with no notice
+Fixed: Issue with Social Activity posting
+Fixed: Some styling issues
+== 1.0.9.1 ==
+New: Masonry layout
+New: Autoload more
+New: Increased simulatanous file uploads
+New: Added option to set number of photos on profile
+Fixed: Allowed Roles conflict with Ultimate Member Profile Menu options
+
+1.0.9.2
+Fixed: Auto loaded image showing wrong images
+
+
+1.0.9.4
+Fixed: Single album mode displaying wrong media
+Fixed: Slashes appearing where apostrophes are added
+
+1.0.9.4.1
+Fixed: Fixed an error that displayed on main profile
+
+1.0.9.4.2
+Fixed: Masonry not working with all photos
+
+1.0.9.4.2.1
+Fixed: Gallery and EventOn plugin conflicts
+
+1.0.9.5
+
+Tested Compatibily with WordPress 5.4.1 and Ultimate Member  2.1.5
+
+New: Privacy for Albums and Photos has been integrated
+
+1.0.9.5.4
+
+New: Separated settings for Main layout and Gallery tab
+New: Placeholder for new layouts added
+Fixed: Avatar and name not linked to user profile in comments
+Fixed: Shortcodes always autoload a photo
+Fixed: Carousel not showing based on settings
+Fixed: Unminified source assets are not needed.
+
+1.0.9.5.5
+
+Fixed: Gallery images not changing due to JS error
+
+1.0.9.5.6
+
+Fixed: Not able to have multiple galleries on page
+
+1.0.9.5.7
+
+Fixed: Vimeo videos not working anymore

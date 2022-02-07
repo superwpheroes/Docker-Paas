@@ -1,0 +1,154 @@
+jQuery(function() {
+	
+  var is_processing = is_processing_split = false;
+  var success_response = success_response_split = false;
+  
+  jQuery(".delete-img-sub").on("click",function(){
+
+  	if(is_processing) return;
+
+  	is_processing = true;
+  	jQuery(".images-submitted").css({
+  		'opacity':'0.7',
+  		'pointer-events' : 'none'
+  	});
+
+  	var image_deleted = jQuery(this);
+  	var entry_id = jQuery(this).attr('data-entry-id');
+  	var photo_id = jQuery(this).attr('data-photo-id');
+  	var user_id = jQuery(this).attr('data-user-id');
+
+  	var normal = parseInt(jQuery('.left_to_submit').html());
+  	var extra = parseInt(jQuery('#extra_entry_imgs').val());
+  	var new_normal = parseInt(normal);
+  	var new_extra = parseInt(extra);
+  	console.log('new normal '+new_normal);
+  	console.log('new extra '+new_extra);
+
+  	jQuery.ajax({
+			url : ajaxurl,
+			type : 'POST',
+			data : {
+				action   : 'delete_entry_image',
+				entry_id : entry_id,
+				photo_id : photo_id,
+				user_id  : user_id,
+				security : jQuery("#delete_img_sub-ajax-nonce").val()
+
+			},
+			success: function(response,status,xhr){
+		        success_response = true;
+		        console.log(response);
+		        response = JSON.parse(response);
+		        console.log(response);
+		        if(response.error == ''){
+		        	image_deleted.parent('.submittion-image').remove();
+			        if(response.extra =='1'){
+			        	console.log('extra');
+			        	new_extra = parseInt(extra) + parseInt(1);
+			        	jQuery("#extra_entry_imgs").val(new_extra);
+			        }
+			        if(response.normal =='1'){
+			        	console.log('normal');
+			            new_normal = parseInt(normal) + parseInt(1);
+                  jQuery('.left_to_submit').html(new_normal);
+			        }
+			        var new_total = parseInt(new_extra)+parseInt(new_normal);
+			        console.log(new_extra);
+			        console.log(new_normal);
+			        console.log(new_total);
+			        jQuery('.total_entry_imgs').html(new_total);
+
+		        }
+		        else{
+		        	console.log('eeerrr');
+		        }
+
+
+
+		        is_processing = false;
+		    },
+		    error: function(xhr, status, error){
+		        alert("Error occured !!" + xhr.status);
+		        is_processing = false;
+		        jQuery(".images-submitted").css({
+			  		'opacity':'1',
+			  		'pointer-events' : 'auto'
+			  	});
+		    },
+		    complete: function(){
+		        if(!success_response){
+		             alert('Error occured !');
+		        }
+		        jQuery(".images-submitted").css({
+			  		'opacity':'1',
+			  		'pointer-events' : 'auto'
+			  	});
+		        is_processing = false;
+		    },
+	});
+
+  });
+
+
+	jQuery(".split-entries-btn").on("click",function(){
+		if(is_processing_split) return;
+	  	is_processing_split = true;
+	  	jQuery(".split-entries-result").html('');
+
+		var theme_name = jQuery("#theme_name").val();
+		var theme_start_date = jQuery("#theme_start").val();
+		var theme_end_date = jQuery("#theme_end").val();
+
+		  	jQuery.ajax({
+			url : ajaxurl,
+			type : 'POST',
+			data : {
+				action   : 'split_theme_entries',
+				theme_name : theme_name,
+				theme_start_date : theme_start_date,
+				theme_end_date : theme_end_date
+
+			},
+			success: function(response,status,xhr){
+		        success_response_split = true;
+		        console.log(response);
+		        jQuery(".split-entries-result").html(response);
+		        is_processing_split = false;
+		    },
+		    error: function(xhr, status, error){
+		        alert("Error occured !!" + xhr.status);
+
+		        is_processing_split = false;
+
+		    },
+		    complete: function(){
+		        if(!success_response_split){
+		             alert('Error occured !');
+		        }
+		        jQuery(".images-submitted").css({
+			  		'opacity':'1',
+			  		'pointer-events' : 'auto'
+			  	});
+		        is_processing_split = false;
+		    },
+		});		
+	});
+
+
+
+	
+
+	// edit-split-entries-btn 
+
+	jQuery("#theme_name, #theme_start, #theme_end").on('input',function(){
+		jQuery(".split-entries-result").html('');
+	})
+
+
+
+
+
+
+
+});

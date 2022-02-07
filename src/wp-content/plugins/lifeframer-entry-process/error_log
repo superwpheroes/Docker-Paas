@@ -1,0 +1,13 @@
+[29-Sep-2017 17:08:12 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error: `POST https://content.dropboxapi.com/2/files/upload` resulted in a `400 Bad Request` response:
+Error in call to API function "files/upload": HTTP header "Dropbox-API-Arg": path: 'MassimilianoFiumefreddo4.JPG' did no (truncated...)
+' in /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:113
+Stack trace:
+#0 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/guzzlehttp/guzzle/src/Middleware.php(65): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Psr7\Request), Object(GuzzleHttp\Psr7\Response))
+#1 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/guzzlehttp/promises/src/Promise.php(203): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Response))
+#2 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/guzzlehttp/promises/src/Promise.php( in /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/Http/Clients/DropboxGuzzleHttpClient.php on line 59
+[06-Nov-2017 13:43:37 America/Denver] PHP Fatal error:  Uncaught exception 'Kunnu\Dropbox\Exceptions\DropboxClientException' with message 'Failed to create DropboxFile instance. Unable to read resource: //home/lifefram/public_html/wp-content/uploads/dropbox_errors/MassimilianoFiumefreddo4.JPG.' in /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/DropboxFile.php:221
+Stack trace:
+#0 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/DropboxFile.php(200): Kunnu\Dropbox\DropboxFile->open()
+#1 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/DropboxFile.php(284): Kunnu\Dropbox\DropboxFile->getStream()
+#2 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/Dropbox.php(778): Kunnu\Dropbox\DropboxFile->getSize()
+#3 /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/test.php(21): Kun in /home/lifefram/public_html/wp-content/plugins/lifeframer-entry-process/vendor/kunalvarma05/dropbox-php-sdk/src/Dropbox/DropboxFile.php on line 221

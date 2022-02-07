@@ -1,0 +1,27 @@
+<div class="usin-columns">
+<div class="usin-custom-fields-form-element usin-column usin-one-third">
+	<label>{{strings.fieldName}}</label>
+	<input type="text" name="usin-field-name" ng-model="field.name"/>
+</div>
+<div class="usin-custom-fields-form-element usin-column usin-one-third">
+	<label>{{strings.fieldKey}}</label>
+	<input type="text" name="usin-field-key" ng-model="field.key" ng-disabled="mode == 'edit'"/>
+</div>
+<span ng-if="mode=='add'" class="usin-custom-directive" ng-repeat="ct in customTemplates['after_key_field']" ct="ct" ></span>
+<div class="usin-custom-fields-form-element usin-column usin-one-third">
+	<label>{{strings.fieldType}}</label>
+	<usin-select-field ng-model="field.type" options="fieldTypes" option-key="type" option-val="name"></usin-select-field>
+</div>
+</div>
+<br>
+<div class="usin-custom-fields-form-element usin-custom-fields-dropdown-options" ng-if="field.type=='select'">
+	<div class="usin-columns">
+		<div class="usin-column usin-two-thirds">
+			<label>{{strings.fieldOptions}}</label>
+			<textarea class="usin-textarea" ng-model="field.options"></textarea>
+		</div>
+		<div class="usin-column usin-one-third">
+			<p ng-bind-html="strings.fieldOptionsInfo" class="usin-message"></p>
+		</div>
+	</div>
+</div>

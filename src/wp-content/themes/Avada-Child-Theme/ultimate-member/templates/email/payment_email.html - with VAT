@@ -1,0 +1,102 @@
+
+		<table style="margin: 0 auto; width: 80%; text-align: center; border: none; border-collapse: collapse; font-size: 16px" cellpadding="0" border="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td style="border: none;" colspan="4"><img style="width: 15%;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAAgVBMVEUAAAAEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwcEBwd9XAmHAAAAKnRSTlMABIrMCLquVPXsJpci70YC0NX56PfewaZXSj8sGMWTaWc3EX+YKbOamV7MaCJ9AAACHklEQVR42u3b606zUBCF4QX9tJsW5VCUVj7roR7n/i/QnZigFamZkI4rcd4reJJZIfsP8LxvWp9O6um1wFE6lUmlCY7TAycrSSlZKB4oWUDLycKSk5WklCwUS0oW0HKysOVkJSklK+6LkgW0nCxsOVlJSslCsaVkAS0nC7uX5Xgn37AI2nCy5s5y1nvO0uQsTc7S5CxNztL0V1ibX2MtsiaMVv8aC1cZ41se2GSULNwFSha6QMmK+6JkxX1RsuK+VKznAjZ1QcMqy3vYdLVSsGZy+R82bTINSy7/waa7oGFJabWvx6BhyYxmX3ssu32dZxqWXJPsa49luq8zDUvsvl8XZ33hIMt2X9153+4gq9+XdfMfWbEqgSIDlmJfhizFvixZin1ZsrT7smdJqbijIUvaAorMWCfj83KWs5zlLIzlLGc5y1kYy1nOcta01pysvKJkIV9RspBfULKwKClZWFSUrLgvSlbcFyUr7ouSFfdFyYr7omTFfVGykM8oWXFflKy4L0pW3BclC3m1ZWShW1OyYs5y1l7O0uQsTc7S5CxNztLkLE3O0uQsTc7S5CxNFiyG/6WGrOtucagcFg1ZdXaw1S0Mmom2MMcgApbUQxcDS8LgjhSsoYuDNdgXCevrvlhY0uzdkYYl4QYf8bCkmaOPiPV5X0wsafo7UrE+9sXFkmYNIEbGkvrdxcaS+jh3rGRqOxyhIpkawxv7D/cGcPAFPT8THBcAAAAASUVORK5CYII=" /></td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<tr>
+					<td style="border: none;" colspan="4"><h2 style="font-size: 24px; text-decoration: underline; font-weight: bold;">YOUR PAYMENT RECEIPT</h2></td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<tr>
+					<td style="border: none; text-align: left;" colspan="4">
+						<p>Hello {display_name},</p><br>
+						<p>Thank you for joining the Life Framer award, we have received your payment. It may take a few moments for this transaction to appear in your account.</p>
+						<p>
+							<strong>Payment ID: {payment_id}</strong><br>
+							<strong>Description: {description}</strong>
+                        </p>
+                        
+                        <p>
+                            <strong>Total amount excluding VAT: {total_amount_excluding_vat}</strong><br>
+                            <strong>Rate of VAT charged: {rate_of_vat_charged}</strong><br>
+                            <strong>Total amount of VAT: {total_amount_of_vat}</strong><br>
+                            <strong>Total amount including VAT: {total_amount_including_vat}</strong>
+                        </p>
+                        
+                        <p>
+                            <strong>Billed to: {billed_to}</strong><br>
+                            <strong>Billing country: {billing_country}</strong>
+                        </p>
+					</td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="30"><br></td>
+				</tr>
+				<tr>
+					<td style="border: none;" colspan="4"><h2 style="font-size: 24px; text-decoration: underline; font-weight: bold;">YOUR "my LF" ACCOUNT<h2></td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<!--<tr>
+					<td style="border: none;" colspan="4">
+                        <p>
+						Your "my LF" account is the [entrant] [member] area from which you can submit images and create your Life Framer Profile. You can log-in to it at any time from our homepage.
+						</p>
+					</td>
+				</tr>-->
+				<tr>
+					<td style="border: none;" colspan="4">
+                        <p>
+						After payment you'll be taken to a page where you can register for you account. If for any reason this doesn't happen, or you lose the link, you can go back there here: {registration_link}.
+						Please ensure that you register with the same email address as the one you used to pay (you can change it to another address in your account settings afterwards if you need).
+						</p>
+					</td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="30"><br></td>
+				</tr>
+				<tr>
+					<td style="border: none;" colspan="4"><h2 style="font-size: 24px; text-decoration: underline; font-weight: bold;">SUPPORT<h2></td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<tr>
+					<td style="border: none;" colspan="4">
+                        <p>
+                            If you have any question regarding your payment, submission or your "my LF" account, please don't hesitate to get in touch with us via <a style="color: black; text-decoration: underline;" href="mailto:support@life-framer.com">support@life-framer.com</a>. We will get back in touch with you within 24 hours.<br>
+                            Alternatively, if you have any questions, please take a look at the <a style="color: black; text-decoration: underline;" href="https://www.life-framer.com/faqs/">FAQs</a> and <a style="color: black; text-decoration: underline;" href="https://www.life-framer.com/rules/">Rules</a>.
+                        </p>               
+                    </td>
+				</tr>
+				<tr style="">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<tr style="background-color: #f1f1f1;">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+				<tr style="background-color: #f1f1f1;">
+					<td style="border: none;" colspan="4">
+						<a href="https://www.facebook.com/lifeframer"><img  style="margin-left: 0px; margin-right: 10px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAYHAwj/xAApEAABAwIDBwUBAAAAAAAAAAABAAIDBAUGBxESITE1NnF0ExRBscJh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APWqlszLlUW/DoFLI6KSeUR7bToQ3Qk6H44KpWM4xv1yuNZPQVUrHQQVD/TAYARoSBv7IONgw7d7wz3lJC2SJsuy5zpANTuJ491tbdzQP4sXwziG724xW6hmYyKWYah0YJ1cQOJW0oCIiAonN/kdJ5H5KtlEZv8AI6TyPyUHfKXpmTyXfTVYKPyl6ak8l301WCAiIg//2Q=="/></a>
+						<a href="https://twitter.com/LifeFramer"><img style="margin-left: 10px; margin-right: 10px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGwAAAwACAwAAAAAAAAAAAAAAAAYHAQMEBQj/xAAqEAACAQQABQMEAwEAAAAAAAABAgMABAURBgcSITETUWFicYGhQUORsv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD1BBnsfLnbjDNJ6dzFrpDdhJsb7fI34rtakXMz0k4pleKOWGbSlyddLdhplP6/FacZxvn7KMRG4S6QDQFwvUR+QQT+TQMXEfMGW2yEltiraCRImKtLNs9RHnQBHauTheP4730baayWK6dtMxkCxAe433J+kb371MXYu7MR3Y7pu5U2yz8SPK8ausMJYFhvpbYAI+fNBVwdjYB7/FFZooFXmPhpsnjFms7OG4uYvOwfU6fpII39jvzUluIZoJmhnieKRezI6lSPuDVk4ixGdvFYY7iCS3Rv6mjUf46gMP3ScvLnMvKWmvrHRO2YO7H/AJFAkgEnQGyar3LjBviMQZrlOm6uiGZSO6KPAPz/ADWeGuC8biJVuZWN5dKdq7rpUPuF9/k7pooCiiig/9k="/></a>
+						<a href="https://www.instagram.com/life_framer"><img style="margin-left: 10px; margin-right: 0px;" src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACIDASIAAhEBAxEB/8QAGgAAAwADAQAAAAAAAAAAAAAAAAQFAgMGB//EADEQAAEDAwEGAgkFAAAAAAAAAAECAwQABREGBxMhMUFRFdISFCREgaKyweEiMmFxgv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD3+7v3LUepX7HAmLhQog9odR+5Z7fbH8Gtg2dWXmuXcFK6kuJ8tGgRnUOo1k8fWsfMulXmZWsdRTYrkt2PaYK92UNnBcVn8HnyoGVbPbAGysyp4SkZKg6jgB/mocaUbI0Ltp+7SJ1raeDUiO+CCnPXtx7gCn75p5zS0fxmxTHwlojfsuqBStJOOgGefI0/qVqCdnciRAitRmpCG3vQQkDiVJPGg65h1DzDbzZyhxIUk9wRkUVGsLqvA4HH3Zv6RRQSdAkjUOo0EYPrWfmXSrz0rR2oZspyI7ItM5W8K2xktqz+Tzxmt12YuenNSv3y3w1zYUse0tN59JJ7/fP9isztGsoGFw7iFdRu0eagTveoXdVMeC2GFIUl5Q37zqcBCc56E4+NVtZxkQNn70NBKktNNtg98KSM0qNotjAwIlwA7BtHmpO5TrhrQtW63wH41t3gW9IeGMgdO3wBNB0dhbX4HA/T7s39Ioqyw0hlhtlsYQ2kJSOwAwKKD//Z"/></a>
+					</td>
+				</tr>
+				<tr style="background-color: #f1f1f1;">
+					<td style="border: none;" colspan="4"><a style="color: #9C9C9C; text-decoration: underline" href="https://www.life-framer.com/login/">www.life-framer.com</td>
+				</tr>
+				<tr style="background-color: #f1f1f1;">
+					<td style="border: none;" colspan="4"><p style="color: #9C9C9C;">&copy; Life Framer {year}. All rights reserved.</p></td>
+				</tr>
+				<tr style="background-color: #f1f1f1;">
+					<td style="border: none;" colspan="4" height="20"><br></td>
+				</tr>
+			</tbody>
+		</table>

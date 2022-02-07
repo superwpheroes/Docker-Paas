@@ -1,0 +1,11 @@
+<div class="usin-module-settings">
+
+	<div ng-repeat="(fieldId, field) in module.settings">
+		<label>{{field.name}}
+			<usin-info-icon ng-if="field.desc" text="field.desc" />
+		</label>
+		<usin-checkboxes-field ng-if="field.type=='checkboxes'"
+			value="field.value" options="field.options" />
+	</div>
+
+</div>

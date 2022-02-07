@@ -1,0 +1,225 @@
+.fusion-builder-row:hover  .bold-on-hover{
+    font-weight: bold;
+}
+
+.submittion-items{
+    margin-bottom: 20px;
+}
+
+
+.submittion-items:last-of-type{
+    margin-bottom: 0;
+}
+
+.submittion-items span{
+    color: #747474;
+    display: block;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.submittion-image{
+    width: 14.5%;
+    float: left;
+    padding: 10px;
+}
+
+.submittion-image img{
+    max-width: 100%;
+}
+
+.submittion-images .submittion-image:nth-child(6n+1) {  
+    clear: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.submittion-image{
+    position: relative;
+}
+
+.submittion-image a.delete-img-sub{
+    position: absolute;
+    color: #f05858;
+    right: -2px;
+    top: -2px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.submittion-image a.delete-img-sub:before {
+    content: "\f153";
+    font-family: dashicons;
+}
+
+/* Add new theme */
+.add-new-theme{
+    border: 1px solid #bdbdbd;
+    padding: 0px 20px 20px 20px;
+}
+
+.add-new-theme h3,
+.edit-theme h3,
+.split-entries h3{
+    width: 20%;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+}
+
+
+
+.new-theme,
+.split-entries,
+.edit-theme{
+/*    width: 50%;
+    float: left;*/
+}
+
+.split-entries-btn{
+    text-align: center;
+    margin-top: 15px !important;
+}
+
+.edit-theme label,
+.new-theme label,
+.split-entries label,
+.split-entries-btn-holder,
+.submit-holder{
+    width: 20%;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.split-entries hr{
+    margin-bottom: px;
+}
+
+.edit-theme #theme_name{
+    pointer-events: none;
+    background: rgba(255,255,255,.5);
+    border-color: rgba(222,222,222,.75);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+    color: rgba(51,51,51,.5);
+}
+
+.edit-theme label,
+.new-theme label,
+.split-entries label,
+.new-theme input[type="text"],
+.split-entries input[type="text"],
+.edit-theme input[type="text"]{
+    margin-bottom: 5px;
+}
+
+.new-theme input[type="text"],
+.split-entries input[type="text"],
+.edit-theme input[type="text"]{
+    width: 45%;
+    display: inline-block;
+}
+
+.split-entries-result .error{
+    color: red;
+    padding-top: 10px !important;
+    width: 20%;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.extra-credits h3{
+    text-align: left;
+    margin: 0 auto 10px auto;
+}
+
+.extra-credits .images_no{
+    padding-left: 7px;
+}
+
+.extra-credits th{
+        width: 25%;
+        text-align: right;
+}
+
+.extra-credits th,
+.extra-credits td{
+    padding: 5px 15px 5px 0;
+    margin: 0 !important;
+    line-height: 24px;
+}
+
+@media(max-width: 789px){
+    .new-theme,
+    .split-entries,
+    .edit-theme{
+        width: 100%;
+        float: none;
+    }
+}
+
+
+.submittion-images.submittion-images-backend p{
+    margin-top: 2px;
+}
+
+.submittion-image span.change-img_name{
+    color: #00a0d2;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 18px;
+    padding-left: 0px;
+    position: relative;
+    padding-top: 5px;
+}
+.submittion-image span.change-img_name:before{
+    content: '\f464';
+    font-family: 'dashicons';
+    font-size: 17px;
+    position: absolute;
+    left: 0;
+}
+.submittion-image span.change-img_name span{
+    padding-left: 20px;
+    color: #00a0d2;
+}
+
+.submittion-image span.save-img_name{
+    color: #0f841e;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 18px;
+    padding-left: 0px;
+    position: relative;
+    padding-top: 5px;
+}
+.submittion-image span.save-img_name:before{
+    content: '\f12a';
+    font-family: 'dashicons';
+    font-size: 17px;
+    position: absolute;
+    left: 0;
+}
+.submittion-image span.save-img_name span{
+    padding-left: 20px;
+    color: #0f841e;
+}
+
+.entry-img_name{
+    padding: 0;
+    width: 100%;
+    font-size: 13px;
+}
+.entry-img_name:disabled{
+    font-size: 13px;
+    background: unset;
+    color: unset;
+    box-shadow: unset;
+    border: 0;
+    resize: none;
+}

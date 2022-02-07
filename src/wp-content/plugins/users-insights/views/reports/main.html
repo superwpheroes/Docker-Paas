@@ -1,0 +1,24 @@
+<div class="usin-tabs">
+	<ul>
+	<li ng-class="['usin-tab', {'usin-tab-selected': $ctrl.currentGroup == group}]" 
+		ng-repeat="group in $ctrl.reportGroups" ng-click="$ctrl.changeGroup(group)">
+		<span class="usin-tab-text">{{group.name}}</span>
+	</li>
+	<usin-report-toggle reports="$ctrl.reports" group="$ctrl.currentGroup" 
+		on-visibility-change="$ctrl.changeReportVisibility(report, newVisibility)"></usin-report-toggle>
+	</ul>
+	
+</div>
+<div class="usin-reports">
+	<usin-report ng-repeat="ro in $ctrl.reports | group: $ctrl.currentGroup | filter:{visible:true}" 
+		report-options="ro" class="usin-report-box">
+	</usin-report>
+</div>
+<div class="clear"></div>
+<div ng-if="$ctrl.currentGroup.info" class="usin-group-info">
+	<p>{{$ctrl.currentGroup.info}}</p>
+</div>
+
+<div class="usin-no-reports-found notice notice-warning" ng-if="!($ctrl.reports | group:$ctrl.currentGroup).length">
+	<p>{{$ctrl.strings.noReportsFound}}</p>
+</div>

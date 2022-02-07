@@ -1,0 +1,35 @@
+<span>
+	<span class="usin-filter-operator">{{strings.with}}</span>
+	<span ng-repeat="(i, item) in condition">
+		
+		<span class="usin-combined-filter-item">
+			<usin-select-field ng-model="item.id" options="items" option-key="id" 
+				option-val="name" ng-change="doOnFieldSelected(i, item.id)" disabled-choices="disabledItems" class="usin-select-small"></usin-select-field>
+			
+				<span ng-if="item.type == 'number'">
+					<!-- filter by number -->
+					<span class="usin-combined-filter-word">{{strings.between}}</span><input type="number" ng-model="item.val[0]">
+					<span class="usin-combined-filter-word">{{strings.and}}</span><input type="number" ng-model="item.val[1]">
+				</span>
+			
+				<span ng-if="item.type == 'select'">
+					<!-- filter by select -->
+					<usin-select-field ng-model="item.val" options="item.options" class="usin-select-medium" 
+						search-action="item.searchAction"></usin-select-field>
+				</span>
+			
+				<span ng-if="item.type == 'date'">
+					<!-- filter by date -->
+					<span class="usin-combined-filter-word">{{strings.between}}</span><usin-date-field ng-model="item.val[0]"></usin-date-field>
+					<span class="usin-combined-filter-word">{{strings.and}}</span><usin-date-field ng-model="item.val[1]"></usin-date-field>
+				</span>
+			
+		</span>
+
+		<span ng-if="i<condition.length-1" class="usin-filter-operator">{{strings.and}}</span>
+
+	</span>
+	<button class="usin-btn usin-btn-apply usin-btn-add usin-icon-add" ng-click="addItem()" ng-disabled="!canAddMore()">
+		<md-tooltip md-direction="top">{{strings.and}}</md-tooltip>
+	</button>
+</span>

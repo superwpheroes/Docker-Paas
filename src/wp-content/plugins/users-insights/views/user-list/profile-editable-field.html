@@ -1,0 +1,24 @@
+<div ng-class="['usin-editable-field', {'usin-field-editing': editing}]">
+	<span class="field-name">{{field.name}}: </span>
+	<span class="field-value" ng-hide="editing">{{user[field.id] | optionKeyToVal:field.options || '-'}}</span>
+	
+	<span ng-if="canUpdateUsers">
+		<input type="text" ng-if="field.type=='text' || field.type=='date'" ng-model="user[field.id]" ng-show="editing" ng-keyup="$event.keyCode==13 && updateField()">
+		<input type="number" usin-string-to-number ng-if="field.type=='number'" ng-model="user[field.id]" ng-show="editing" ng-keyup="$event.keyCode==13 && updateField()">
+		<span ng-if="field.type=='select'" ng-show="editing" class="usin-editable-select-wrap">
+			<div class="usin-profile-select-wrap">
+				<usin-select-field ng-model="user[field.id]" options="field.options" ng-keyup="$event.keyCode==13 && updateField()"></usin-select-field>
+				<div class="usin-btn-close usin-icon-close" ng-click="clearSelection()">
+					<md-tooltip md-direction="top">{{strings.clearSelection}}</md-tooltip>
+				</div>
+			</div>
+		</span>
+		
+		<div class="usin-btn-edit usin-icon-edit alignright" ng-click="toggleEdit()" ng-show="!editing && !settings.editing"></div>
+		<div ng-class="['usin-btn-apply', 'alignright', {'usin-icon-apply':!loading, 'usin-icon-simple-loading':loading}]" ng-click="updateField()" ng-show="editing">
+			<md-tooltip md-direction="top">{{strings.saveChanges}}</md-tooltip>
+		</div>
+		<div class="usin-error" ng-show="errorMsg">{{errorMsg}}</div>
+	</span>
+	<div class="clear"></div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+
+	<ul class="usin-checkbox-options">
+		<li ng-repeat="(key, val) in $ctrl.options">
+			<md-checkbox ng-checked="$ctrl.isOptionChecked(key)" ng-click="$ctrl.onOptionClick(key)" md-no-ink="true"
+				aria-label="{{val}}"></md-checkbox>
+			{{val}}
+		</li>
+	</ul>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div ng-class="{'usin-module-active': module.active, 'usin-module-inactive': !module.active, 'usin-module-edit': state == 'edit'}">
+	<div class="usin-module-head">
+		<div class="usin-module-icon">
+			<span class="usin-icon-{{module.id}}"></span>
+		</div>
+		<h3 class="usin-module-title">{{module.name}}</h3>
+		<span class="usin-icon-close" ng-click="setStatusDefault()"></span>
+		<span class="usin-module-beta-tag" ng-if="module.in_beta" ng-hide="state == 'edit'">{{strings.beta}}</span>
+	</div>
+
+	<div class="usin-module-content">
+		<h3 class="usin-module-title">{{module.name}}</h3>
+
+		<div ng-switch="state">
+
+			<div ng-switch-when="edit">
+				<div class="usin-license" ng-if="module.requires_license"></div>	
+				<div class="usin-settings" ng-if="module.settings"></div>	
+			</div>
+			
+			<p ng-switch-default>{{module.desc}}</p>
+
+		</div>
+		
+	</div>
+
+	<div class="usin-module-footer">
+		<a class="usin-btn usin-btn-main" ng-if="!module.active" ng-click="onActivateClick()"
+			ng-class="{'usin-btn-disabled' : state == 'edit' && !module.license.activated}">
+			{{strings.activateModule}}
+		</a>
+
+		<a class="usin-btn usin-btn-main" ng-if="settingsButton && module.active" ng-click="onSettingsBtnClick()"
+			ng-class="{'usin-btn-disabled' : settingsButton.disabled}">
+			{{ settingsButton.text }}
+		</a>
+
+		
+		<a class="usin-btn" ng-if="module.active && module.allow_deactivate" ng-hide="state == 'edit'" ng-click="onDeactivateClick()">
+			{{strings.deactivateModule}}
+		</a>
+
+
+		<a ng-repeat="button in module.buttons" href="{{button.link}}" ng-hide="state == 'edit'" class="usin-btn" target="{{button.target || '_self'}}">
+			{{button.text}}
+		</a>
+
+		<span class="usin-icon-module-loading" ng-show="moduleLoading"></span>
+		<div class="usin-icon-check usin-success-icon" ng-show="moduleSuccess"></div>
+		<div class="usin-text-error" ng-if="moduleError">{{moduleError}}</div>
+	</div>
+</div>

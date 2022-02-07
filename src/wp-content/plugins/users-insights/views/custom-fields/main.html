@@ -1,0 +1,33 @@
+<div class="usin-custom-fields-wrap">
+	<h3>{{$ctrl.strings.addField}}</h3>
+
+	<div class="usin-custom-fields-form">
+		<usin-field-form field="$ctrl.field" mode="add"></usin-field-form>
+		<div class="usin-btn usin-btn-main" ng-click="$ctrl.addField()">{{$ctrl.strings.addField}}</div>
+		<div class="usin-error" ng-show="$ctrl.errorMsg">{{$ctrl.errorMsg}}</div>
+		<span class="usin-icon-simple-loading" ng-show="$ctrl.loading"></span>
+	</div>
+
+	<div class="usin-message">{{$ctrl.strings.keyMessage}}</div>
+
+
+
+	<div ng-if="$ctrl.fields.length">
+			<h3>{{$ctrl.strings.fields}}</h3>
+			
+			<div class="usin-table-wrap">
+				<table class="usin-table">
+					<thead>
+						<tr>
+							<th>{{$ctrl.strings.fieldName}}</th>
+							<th>{{$ctrl.strings.fieldKey}}</th>
+							<th>{{$ctrl.strings.fieldType}}</th>
+							<th>{{$ctrl.strings.actions}}</th>
+						</tr>
+					</thead>
+					<tr usin-field-row ng-repeat="f in $ctrl.fields" field="f" on-fields-change="$ctrl.doOnFieldsChange(fields)"></tr>
+				
+				</table>
+			</div>
+		</div>
+</div>

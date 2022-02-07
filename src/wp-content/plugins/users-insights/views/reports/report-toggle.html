@@ -1,0 +1,18 @@
+<div class="usin-report-toggle">
+	<md-tooltip md-direction="top">{{$ctrl.strings.toggleReports}}</md-tooltip>
+	<span ng-click="$ctrl.toggleMenu()"> 
+		<span class="usin-reports-visible">{{($ctrl.reports | group:$ctrl.group | filter:{visible:true}).length}}/{{($ctrl.reports | group:$ctrl.group).length}}</span>
+		<span class="usin-icon-visible usin-btn-drop-down usin-reports-icon" ng-class="{'usin-btn-drop-down-opened' : $ctrl.displayed === true}"/>
+	</span>
+	<div class="usin-fields-settings usin-drop-down" ng-show="$ctrl.displayed">
+		<ul>
+			<li ng-repeat="report in $ctrl.reports | group:$ctrl.group">
+				<span>
+					<md-checkbox ng-checked="report.visible" ng-click="$ctrl.onCheckboxChange(report)" md-no-ink="true"
+						aria-label="Toggle report {{report.name}}"></md-checkbox>
+					{{report.name}}
+				</span>
+			</li>
+		</ul>
+	</div>
+</div>

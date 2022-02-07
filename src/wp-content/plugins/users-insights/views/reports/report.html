@@ -1,0 +1,26 @@
+<div ng-class="['usin-report-wrap', {'usin-simple-loading': $ctrl.loading}]">
+	<div class="usin-report-header">
+		<span class="usin-report-title">{{$ctrl.reportOptions.name}}</span>
+		<span class="usin-icon-info" ng-if="$ctrl.reportOptions.info">
+			<md-tooltip md-direction="right">{{$ctrl.reportOptions.info}}</md-tooltip>
+		</span>
+		
+		<ui-select ng-model="$ctrl.filter" ng-change="$ctrl.onFilterChange()" ng-if="$ctrl.hasFilters()" 
+			theme="select2" search-enabled="{{$ctrl.shouldEnableSearch()}}" ng-disabled="$ctrl.loading">
+			<ui-select-match>{{$ctrl.reportOptions.filters.options[$ctrl.filter]}}</ui-select-match>
+			<ui-select-choices repeat="item.key as (key , item) in $ctrl.reportOptions.filters.options | filter: $select.search" position="down">
+				<span>{{item.value}}</span>
+			</ui-select-choices>
+		</ui-select>
+
+		<div class="clear"></div>
+	</div>
+	<div class="usin-report-graph">
+		<div ng-if="!$ctrl.loading && !$ctrl.error">
+			<usin-chart chart-options="$ctrl.chartOptions"></usin-chart>
+		</div>
+		<div ng-if="$ctrl.error" class="usin-error">
+			{{$ctrl.error}}
+		</div>
+	</div>
+</div>
