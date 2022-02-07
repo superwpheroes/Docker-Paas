@@ -1,0 +1,416 @@
+[11-Mar-2013 19:08:48] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[12-Mar-2013 03:09:52] PHP Fatal error:  Call to undefined function  _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[19-Dec-2014 06:32:17 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/lifefram/public_html/wp-includes/admin-bar.php on line 48
+[28-Jun-2015 03:38:49 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/nav-menu-template.php on line 16
+[28-Jun-2015 03:38:52 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss.php on line 19
+[28-Jun-2015 03:39:45 America/Denver] PHP Fatal error:  Class 'WP_Widget' not found in /home2/lifefram/public_html/wp-includes/default-widgets.php on line 14
+[28-Jun-2015 03:39:50 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/default-filters.php on line 17
+[28-Jun-2015 03:42:42 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[28-Jun-2015 03:42:42 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[28-Jun-2015 03:42:42 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[28-Jun-2015 03:45:39 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home2/lifefram/public_html/wp-includes/vars.php on line 23
+[28-Jun-2015 03:52:24 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[28-Jun-2015 03:52:24 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[28-Jun-2015 03:52:24 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[15-Jul-2015 14:50:08 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[30-Jul-2015 15:35:29 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[14-Aug-2015 13:49:50 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[29-Aug-2015 13:56:39 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[05-Sep-2015 14:41:42 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[05-Sep-2015 14:41:42 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[05-Sep-2015 14:41:42 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[05-Sep-2015 14:41:42 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[05-Sep-2015 14:41:42 America/Denver] PHP Fatal error:  Call to undefined function add_shortcode() in /home2/lifefram/public_html/wp-includes/media.php on line 831
+[05-Sep-2015 14:41:42 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/class-wp-embed.php on line 28
+[05-Sep-2015 14:41:43 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[05-Sep-2015 14:41:43 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[05-Sep-2015 14:41:43 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[05-Sep-2015 14:41:43 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[05-Sep-2015 14:41:43 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/nav-menu-template.php on line 16
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-styles.php on line 19
+[05-Sep-2015 14:41:43 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rdf.php on line 8
+[05-Sep-2015 14:41:44 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home2/lifefram/public_html/wp-includes/vars.php on line 23
+[05-Sep-2015 14:41:44 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/lifefram/public_html/wp-includes/ms-default-filters.php on line 16
+[05-Sep-2015 14:41:45 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[05-Sep-2015 14:41:45 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[05-Sep-2015 14:41:45 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[05-Sep-2015 14:41:45 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/comment-template.php on line 1680
+[05-Sep-2015 14:41:46 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/default-filters.php on line 17
+[05-Sep-2015 14:41:47 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2-comments.php on line 8
+[05-Sep-2015 14:41:47 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom-comments.php on line 8
+[05-Sep-2015 14:41:49 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration.php on line 7
+[05-Sep-2015 14:41:49 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[05-Sep-2015 14:41:49 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[05-Sep-2015 14:41:49 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[05-Sep-2015 14:41:51 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-scripts.php on line 19
+[05-Sep-2015 14:41:51 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss.php on line 19
+[05-Sep-2015 14:41:52 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/class-snoopy.php on line 6
+[05-Sep-2015 14:41:52 America/Denver] PHP Fatal error:  Class 'IXR_Server' not found in /home2/lifefram/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[05-Sep-2015 14:41:52 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[05-Sep-2015 14:41:52 America/Denver] PHP Fatal error:  Class 'IXR_Client' not found in /home2/lifefram/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[05-Sep-2015 14:41:52 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom.php on line 8
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Call to undefined function is_robots() in /home2/lifefram/public_html/wp-includes/template-loader.php on line 28
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/category-template.php on line 967
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss.php on line 8
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2.php on line 8
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Call to undefined function is_main_site() in /home2/lifefram/public_html/wp-includes/update.php on line 678
+[05-Sep-2015 14:41:53 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/post-template.php on line 1325
+[05-Sep-2015 14:46:07 America/Denver] PHP Fatal error:  Class 'WP_Widget' not found in /home2/lifefram/public_html/wp-includes/default-widgets.php on line 14
+[21-Sep-2015 10:46:42 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[03-Nov-2015 15:38:16 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom-comments.php on line 8
+[03-Nov-2015 15:38:19 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/class-snoopy.php on line 6
+[03-Nov-2015 15:38:20 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home2/lifefram/public_html/wp-includes/vars.php on line 23
+[03-Nov-2015 15:38:21 America/Denver] PHP Fatal error:  Call to undefined function is_main_site() in /home2/lifefram/public_html/wp-includes/update.php on line 678
+[03-Nov-2015 15:38:21 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/post-template.php on line 1325
+[03-Nov-2015 15:38:26 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/category-template.php on line 967
+[03-Nov-2015 15:38:27 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[03-Nov-2015 15:38:27 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[03-Nov-2015 15:38:27 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[03-Nov-2015 15:38:29 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss.php on line 8
+[03-Nov-2015 15:38:30 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss.php on line 19
+[03-Nov-2015 15:38:31 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[03-Nov-2015 15:38:31 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[03-Nov-2015 15:38:31 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[03-Nov-2015 15:38:31 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[03-Nov-2015 15:38:32 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rdf.php on line 8
+[03-Nov-2015 15:38:32 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/default-filters.php on line 17
+[03-Nov-2015 15:38:33 America/Denver] PHP Fatal error:  Call to undefined function is_robots() in /home2/lifefram/public_html/wp-includes/template-loader.php on line 28
+[03-Nov-2015 15:38:33 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[03-Nov-2015 15:38:34 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration.php on line 7
+[03-Nov-2015 15:38:34 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2-comments.php on line 8
+[03-Nov-2015 15:38:35 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2.php on line 8
+[03-Nov-2015 15:38:35 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/comment-template.php on line 1680
+[03-Nov-2015 15:38:36 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom.php on line 8
+[03-Nov-2015 15:38:38 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[03-Nov-2015 15:38:38 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[03-Nov-2015 15:38:38 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[03-Nov-2015 15:38:39 America/Denver] PHP Fatal error:  Call to undefined function add_shortcode() in /home2/lifefram/public_html/wp-includes/media.php on line 831
+[03-Nov-2015 15:38:39 America/Denver] PHP Fatal error:  Class 'WP_Widget' not found in /home2/lifefram/public_html/wp-includes/default-widgets.php on line 14
+[03-Nov-2015 15:38:43 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-scripts.php on line 19
+[03-Nov-2015 15:38:43 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-styles.php on line 19
+[03-Nov-2015 15:38:44 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[03-Nov-2015 15:38:44 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[03-Nov-2015 15:38:44 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[03-Nov-2015 15:38:44 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[03-Nov-2015 15:38:46 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/nav-menu-template.php on line 16
+[03-Nov-2015 15:38:46 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[03-Nov-2015 15:38:46 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[03-Nov-2015 15:38:46 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[03-Nov-2015 15:38:46 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[03-Nov-2015 15:38:48 America/Denver] PHP Fatal error:  Class 'IXR_Server' not found in /home2/lifefram/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[03-Nov-2015 15:38:50 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/lifefram/public_html/wp-includes/ms-default-filters.php on line 16
+[03-Nov-2015 15:38:53 America/Denver] PHP Fatal error:  Class 'IXR_Client' not found in /home2/lifefram/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[03-Nov-2015 15:38:57 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[03-Nov-2015 15:38:58 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/class-wp-embed.php on line 28
+[03-Nov-2015 15:38:59 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[13-Nov-2015 20:58:09 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss.php on line 8
+[13-Nov-2015 20:58:09 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/default-filters.php on line 17
+[13-Nov-2015 20:58:10 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom.php on line 8
+[13-Nov-2015 20:58:10 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[13-Nov-2015 20:58:10 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[13-Nov-2015 20:58:10 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[13-Nov-2015 20:58:10 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[13-Nov-2015 20:58:11 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[13-Nov-2015 20:58:11 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/lifefram/public_html/wp-includes/ms-default-filters.php on line 16
+[13-Nov-2015 20:58:12 America/Denver] PHP Fatal error:  Call to undefined function add_shortcode() in /home2/lifefram/public_html/wp-includes/media.php on line 831
+[13-Nov-2015 20:58:13 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[13-Nov-2015 20:58:13 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[13-Nov-2015 20:58:13 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[13-Nov-2015 20:58:14 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[13-Nov-2015 20:58:14 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[13-Nov-2015 20:58:14 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[13-Nov-2015 20:58:21 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2-comments.php on line 8
+[13-Nov-2015 20:58:24 America/Denver] PHP Fatal error:  Class 'IXR_Server' not found in /home2/lifefram/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[13-Nov-2015 20:58:25 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration.php on line 7
+[13-Nov-2015 20:58:26 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[13-Nov-2015 20:58:26 America/Denver] PHP Fatal error:  Call to undefined function is_robots() in /home2/lifefram/public_html/wp-includes/template-loader.php on line 28
+[13-Nov-2015 20:58:28 America/Denver] PHP Fatal error:  Call to undefined function is_main_site() in /home2/lifefram/public_html/wp-includes/update.php on line 678
+[13-Nov-2015 20:58:28 America/Denver] PHP Fatal error:  Class 'WP_Widget' not found in /home2/lifefram/public_html/wp-includes/default-widgets.php on line 14
+[13-Nov-2015 20:58:30 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[13-Nov-2015 20:58:30 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[13-Nov-2015 20:58:30 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[13-Nov-2015 20:58:30 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-scripts.php on line 19
+[13-Nov-2015 20:58:32 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom-comments.php on line 8
+[13-Nov-2015 20:58:34 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rdf.php on line 8
+[13-Nov-2015 20:58:35 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/category-template.php on line 967
+[13-Nov-2015 20:58:35 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[13-Nov-2015 20:58:40 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/class-wp-embed.php on line 28
+[13-Nov-2015 20:58:43 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/post-template.php on line 1325
+[13-Nov-2015 20:58:44 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[13-Nov-2015 20:58:44 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[13-Nov-2015 20:58:44 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[13-Nov-2015 20:58:44 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[13-Nov-2015 20:58:45 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[13-Nov-2015 20:58:45 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/nav-menu-template.php on line 16
+[13-Nov-2015 20:58:47 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2.php on line 8
+[13-Nov-2015 20:58:47 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/comment-template.php on line 1680
+[13-Nov-2015 20:58:48 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss.php on line 19
+[13-Nov-2015 20:58:50 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home2/lifefram/public_html/wp-includes/vars.php on line 23
+[13-Nov-2015 20:58:50 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-styles.php on line 19
+[13-Nov-2015 20:58:50 America/Denver] PHP Fatal error:  Class 'IXR_Client' not found in /home2/lifefram/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[13-Nov-2015 20:58:51 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/class-snoopy.php on line 6
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom.php on line 8
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/post-template.php on line 1325
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-styles.php on line 19
+[27-Nov-2015 09:35:06 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[27-Nov-2015 09:35:06 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[27-Nov-2015 09:35:06 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/ms-load.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/ms-load.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/ms-settings.php on line 14
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Call to undefined function is_robots() in /home2/lifefram/public_html/wp-includes/template-loader.php on line 28
+[27-Nov-2015 09:35:06 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[27-Nov-2015 09:35:06 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/functions.php on line 8
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Call to undefined function add_shortcode() in /home2/lifefram/public_html/wp-includes/media.php on line 831
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2.php on line 8
+[27-Nov-2015 09:35:06 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss.php on line 19
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rdf.php on line 8
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss.php on line 8
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Class 'IXR_Client' not found in /home2/lifefram/public_html/wp-includes/class-wp-http-ixr-client.php on line 9
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Class 'WP_Dependencies' not found in /home2/lifefram/public_html/wp-includes/class.wp-scripts.php on line 19
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Class 'WP_Widget' not found in /home2/lifefram/public_html/wp-includes/default-widgets.php on line 14
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-atom-comments.php on line 8
+[27-Nov-2015 09:35:07 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/class-wp-embed.php on line 28
+[27-Nov-2015 09:35:08 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[27-Nov-2015 09:35:08 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[27-Nov-2015 09:35:08 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-simplepie.php): failed to open stream: No such file or directory in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[27-Nov-2015 09:35:08 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-simplepie.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-feed.php on line 4
+[27-Nov-2015 09:35:08 America/Denver] PHP Fatal error:  Call to undefined function feed_content_type() in /home2/lifefram/public_html/wp-includes/feed-rss2-comments.php on line 8
+[27-Nov-2015 09:35:08 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[27-Nov-2015 09:35:08 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home2/lifefram/public_html/wp-includes/default-filters.php on line 17
+[27-Nov-2015 09:35:08 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/nav-menu-template.php on line 16
+[27-Nov-2015 09:35:09 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-imagick.php on line 17
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  Call to undefined function add_action() in /home2/lifefram/public_html/wp-includes/ms-default-filters.php on line 16
+[27-Nov-2015 09:35:10 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[27-Nov-2015 09:35:10 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/SimplePie/Misc.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/class-simplepie.php on line 5
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home2/lifefram/public_html/wp-includes/vars.php on line 23
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/comment-template.php on line 1680
+[27-Nov-2015 09:35:10 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home2/lifefram/public_html/wp-includes/category-template.php on line 967
+[27-Nov-2015 09:35:11 America/Denver] PHP Fatal error:  Call to undefined function is_main_site() in /home2/lifefram/public_html/wp-includes/update.php on line 678
+[27-Nov-2015 09:35:11 America/Denver] PHP Fatal error:  Class 'IXR_Server' not found in /home2/lifefram/public_html/wp-includes/class-wp-xmlrpc-server.php on line 23
+[27-Nov-2015 09:35:12 America/Denver] PHP Notice:  Use of undefined constant ABSPATH - assumed 'ABSPATH' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[27-Nov-2015 09:35:12 America/Denver] PHP Notice:  Use of undefined constant WPINC - assumed 'WPINC' in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[27-Nov-2015 09:35:12 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/lifefram/public_html/wp-includes/script-loader.php on line 25
+[27-Nov-2015 09:35:13 America/Denver] PHP Fatal error:  Class 'WP_Image_Editor' not found in /home2/lifefram/public_html/wp-includes/class-wp-image-editor-gd.php on line 17
+[27-Nov-2015 09:35:13 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/registration.php on line 7
+[27-Nov-2015 09:35:13 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/class-snoopy.php on line 6
+[15-Dec-2015 08:12:42 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[17-Dec-2015 11:12:12 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[28-Mar-2016 19:31:26 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home2/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[14-Oct-2016 09:26:40 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[14-Oct-2016 09:28:43 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[14-Oct-2016 09:28:43 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[14-Oct-2016 09:31:09 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[14-Oct-2016 09:31:10 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[14-Oct-2016 09:36:41 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[14-Oct-2016 09:36:48 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[14-Oct-2016 09:36:48 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[14-Oct-2016 09:36:50 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[14-Oct-2016 09:37:37 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[14-Oct-2016 09:40:21 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:40:21 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:40:21 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:40:44 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:40:44 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:40:44 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:40:48 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-wp-locale.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[14-Oct-2016 09:40:48 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-wp-locale.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[14-Oct-2016 09:41:00 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[14-Oct-2016 09:42:33 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[14-Oct-2016 09:42:33 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[14-Oct-2016 09:42:33 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[14-Oct-2016 09:42:54 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[14-Oct-2016 09:42:54 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[14-Oct-2016 09:42:54 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[14-Oct-2016 09:43:04 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[14-Oct-2016 09:44:35 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[14-Oct-2016 09:44:35 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[14-Oct-2016 09:44:43 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[14-Oct-2016 09:44:48 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[14-Oct-2016 09:44:48 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[14-Oct-2016 09:44:52 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[14-Oct-2016 09:44:53 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[14-Oct-2016 09:44:58 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[14-Oct-2016 09:44:59 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[14-Oct-2016 09:45:02 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[14-Oct-2016 09:45:02 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[14-Oct-2016 09:45:07 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:45:07 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:45:07 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[14-Oct-2016 09:45:22 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:45:22 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:45:22 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[14-Oct-2016 09:45:24 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-wp-locale.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[14-Oct-2016 09:45:24 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-wp-locale.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[14-Oct-2016 09:45:50 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[14-Oct-2016 09:46:33 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[14-Oct-2016 09:46:33 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[14-Oct-2016 09:46:33 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[22-Nov-2016 23:29:43 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[22-Nov-2016 23:29:45 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[22-Nov-2016 23:29:45 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[22-Nov-2016 23:29:51 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[22-Nov-2016 23:29:52 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[22-Nov-2016 23:31:23 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[22-Nov-2016 23:33:33 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[22-Nov-2016 23:34:00 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[22-Nov-2016 23:34:00 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[22-Nov-2016 23:34:04 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[22-Nov-2016 23:35:54 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[22-Nov-2016 23:35:54 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[22-Nov-2016 23:35:54 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[22-Nov-2016 23:36:05 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[22-Nov-2016 23:36:05 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[22-Nov-2016 23:36:05 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[22-Nov-2016 23:36:11 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-wp-locale.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[22-Nov-2016 23:36:11 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-wp-locale.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[22-Nov-2016 23:36:44 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[22-Nov-2016 23:39:42 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[22-Nov-2016 23:39:42 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[22-Nov-2016 23:39:42 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[22-Nov-2016 23:39:53 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[22-Nov-2016 23:39:53 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[22-Nov-2016 23:39:53 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[22-Nov-2016 23:40:16 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[22-Nov-2016 23:40:49 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[22-Nov-2016 23:40:49 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[22-Nov-2016 23:41:09 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-comment.php on line 17
+[28-Nov-2016 20:00:39 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration.php on line 7
+[28-Nov-2016 20:33:22 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration.php on line 7
+[28-Nov-2016 22:00:48 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration.php on line 7
+[29-Nov-2016 06:43:22 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[29-Nov-2016 10:08:23 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration.php on line 7
+[27-Dec-2016 15:21:52 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[06-Jan-2017 15:33:12 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[06-Jan-2017 15:33:12 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[06-Jan-2017 15:33:12 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[17-Jan-2017 04:57:47 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[19-Feb-2017 14:01:25 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[19-Feb-2017 14:02:27 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[19-Feb-2017 14:02:27 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[19-Feb-2017 14:03:56 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[19-Feb-2017 14:03:57 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[19-Feb-2017 14:07:14 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-comment.php on line 17
+[19-Feb-2017 14:09:39 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[19-Feb-2017 14:09:39 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[19-Feb-2017 14:09:45 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[19-Feb-2017 14:12:04 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[19-Feb-2017 14:12:36 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[19-Feb-2017 14:14:25 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:14:25 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:14:25 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:14:46 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:14:46 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:14:46 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:15:00 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-wp-locale.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[19-Feb-2017 14:15:00 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-wp-locale.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[19-Feb-2017 14:15:21 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[19-Feb-2017 14:17:59 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:17:59 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:17:59 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:18:24 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:18:24 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:18:24 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:18:38 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[19-Feb-2017 14:19:01 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[19-Feb-2017 14:19:04 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[19-Feb-2017 14:19:04 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[19-Feb-2017 14:19:08 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[19-Feb-2017 14:19:10 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[19-Feb-2017 14:19:17 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[19-Feb-2017 14:19:17 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[19-Feb-2017 14:19:22 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[19-Feb-2017 14:19:31 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:19:31 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:19:31 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[19-Feb-2017 14:19:48 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:19:48 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:19:48 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[19-Feb-2017 14:19:50 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-wp-locale.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[19-Feb-2017 14:19:50 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-wp-locale.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/locale.php on line 11
+[19-Feb-2017 14:20:00 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[19-Feb-2017 14:20:17 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:20:17 America/Denver] PHP Warning:  require(ABSPATHWPINC/class.wp-dependencies.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:20:17 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class.wp-dependencies.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[19-Feb-2017 14:20:22 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:20:22 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:20:22 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[19-Feb-2017 14:20:39 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[19-Feb-2017 14:20:42 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[19-Feb-2017 14:20:43 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[19-Feb-2017 14:21:42 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[19-Feb-2017 14:21:42 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[19-Feb-2017 14:21:47 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[19-Feb-2017 14:21:47 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 389
+[19-Feb-2017 14:22:30 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-comment.php on line 17
+[10-Mar-2017 13:29:23 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss-functions.php on line 8
+[20-Mar-2017 22:33:59 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[23-Mar-2017 19:52:00 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/registration-functions.php on line 7
+[29-Apr-2017 07:57:40 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[29-Apr-2017 07:58:50 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[29-Apr-2017 07:58:50 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[29-Apr-2017 08:02:24 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[29-Apr-2017 08:02:31 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[29-Apr-2017 08:03:47 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[29-Apr-2017 08:05:35 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 399
+[29-Apr-2017 08:05:35 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 399
+[29-Apr-2017 08:05:52 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[29-Apr-2017 08:07:53 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17
+[29-Apr-2017 08:07:55 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/class-walker-nav-menu.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[29-Apr-2017 08:07:55 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/class-walker-nav-menu.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/nav-menu-template.php on line 11
+[29-Apr-2017 08:08:06 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page-dropdown.php on line 17
+[29-Apr-2017 08:08:07 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-page.php on line 17
+[29-Apr-2017 08:09:21 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[29-Apr-2017 08:09:21 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[29-Apr-2017 08:09:22 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/widgets/class-wp-widget-pages.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[29-Apr-2017 08:09:22 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/widgets/class-wp-widget-pages.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/default-widgets.php on line 11
+[29-Apr-2017 08:09:23 America/Denver] PHP Warning:  require_once(ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 399
+[29-Apr-2017 08:09:23 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'ABSPATHWPINC/customize/class-wp-customize-nav-menus-panel.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-wp-customize-panel.php on line 399
+[29-Apr-2017 08:09:26 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[29-Apr-2017 08:09:30 America/Denver] PHP Fatal error:  Call to undefined function add_filter() in /home/lifefram/public_html/wp-includes/default-filters.php on line 17
+[29-Apr-2017 08:12:28 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-wp-dependency.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:12:28 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-wp-dependency.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:12:28 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-wp-dependency.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:14:04 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:04 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:04 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:05 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:05 America/Denver] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:05 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/functions.php on line 8
+[29-Apr-2017 08:14:28 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-wp-dependency.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:14:28 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-wp-dependency.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:14:28 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-wp-dependency.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/script-loader.php on line 20
+[29-Apr-2017 08:14:47 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:47 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:47 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:48 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:48 America/Denver] PHP Warning:  require(ABSPATHWPINC/random_compat/random.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:48 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/random_compat/random.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/compat.php on line 435
+[29-Apr-2017 08:14:55 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/locale.php on line 10
+[29-Apr-2017 08:15:07 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/locale.php on line 10
+[29-Apr-2017 08:15:38 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[29-Apr-2017 08:15:39 America/Denver] PHP Fatal error:  Call to undefined function is_admin() in /home/lifefram/public_html/wp-includes/vars.php on line 23
+[29-Apr-2017 08:16:10 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/session.php on line 8
+[29-Apr-2017 08:16:12 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/session.php on line 8
+[29-Apr-2017 08:18:03 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:03 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:03 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:04 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:04 America/Denver] PHP Warning:  require(ABSPATHWPINC/class-requests.php): failed to open stream: No such file or directory in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:04 America/Denver] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/class-requests.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/lifefram/public_html/wp-includes/class-http.php on line 11
+[29-Apr-2017 08:18:18 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/rss.php on line 19
+[29-Apr-2017 08:18:34 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[29-Apr-2017 08:18:35 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category.php on line 17
+[29-Apr-2017 08:18:36 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-category-dropdown.php on line 17
+[29-Apr-2017 08:20:53 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-comment.php on line 17
+[29-Apr-2017 08:20:54 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-comment.php on line 17
+[16-Nov-2017 18:50:47 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/session.php on line 8
+[23-Nov-2017 02:27:21 America/Denver] PHP Fatal error:  Call to undefined function _deprecated_file() in /home/lifefram/public_html/wp-includes/session.php on line 8
+[27-Nov-2017 05:58:08 America/Denver] PHP Fatal error:  Class 'Walker' not found in /home/lifefram/public_html/wp-includes/class-walker-nav-menu.php on line 17

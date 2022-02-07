@@ -1,0 +1,14 @@
+[03-Nov-2015 15:36:41 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio-video.quicktime.php on line 18
+[03-Nov-2015 15:36:43 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio-video.matroska.php on line 217
+[03-Nov-2015 15:36:43 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio-video.riff.php on line 26
+[03-Nov-2015 15:36:43 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.tag.id3v2.php on line 17
+[03-Nov-2015 15:36:45 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio.ogg.php on line 17
+[03-Nov-2015 15:36:45 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio.mp3.php on line 26
+[03-Nov-2015 15:36:45 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio-video.asf.php on line 17
+[03-Nov-2015 15:37:35 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio-video.flv.php on line 76
+[03-Nov-2015 15:37:35 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.tag.id3v1.php on line 19
+[03-Nov-2015 15:37:35 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio.dts.php on line 22
+[03-Nov-2015 15:37:36 America/Denver] PHP Fatal error:  Class 'getid3_lib' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio.flac.php on line 18
+[03-Nov-2015 15:37:36 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.tag.lyrics3.php on line 19
+[03-Nov-2015 15:37:37 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.audio.ac3.php on line 19
+[03-Nov-2015 15:37:37 America/Denver] PHP Fatal error:  Class 'getid3_handler' not found in /home2/lifefram/public_html/wp-includes/ID3/module.tag.apetag.php on line 18

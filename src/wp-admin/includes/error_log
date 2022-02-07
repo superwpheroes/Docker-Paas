@@ -1,0 +1,4 @@
+[29-Feb-2016 18:30:13 America/Denver] PHP Fatal error:  Class 'WP_Filesystem_Base' not found in /home2/lifefram/public_html/wp-admin/includes/class-wp-filesystem-ftpext.php on line 17
+[21-Aug-2016 16:38:44 America/Denver] PHP Fatal error:  Class 'WP_Filesystem_Base' not found in /home/lifefram/public_html/wp-admin/includes/class-wp-filesystem-ftpext.php on line 17
+[31-Dec-2016 15:12:17 America/Denver] PHP Fatal error:  Class 'WP_Filesystem_Base' not found in /home/lifefram/public_html/wp-admin/includes/class-wp-filesystem-ftpext.php on line 17
+[12-Jan-2017 15:06:07 America/Denver] PHP Fatal error:  Class 'WP_Filesystem_Base' not found in /home/lifefram/public_html/wp-admin/includes/class-wp-filesystem-ftpext.php on line 17

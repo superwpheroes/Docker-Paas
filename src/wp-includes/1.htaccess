@@ -1,0 +1,12 @@
+
+## WP Defender - Protect PHP Executed ##
+<Files *.php>
+Require all denied
+</Files>
+<Files wp-tinymce.php>
+Require all granted
+</Files>
+<Files ms-files.php>
+Require all granted
+</Files>
+## WP Defender - End ##
