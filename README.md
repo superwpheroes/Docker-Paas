@@ -15,7 +15,7 @@
 - `composer:2.0`
 - `git unzip libzip-dev libicu-dev libonig-dev intl pdo_mysql zip bcmath mysqli`
 
-### 2.NGINX
+### 2. NGINX
 - `nginx:1.18-alpine`
 
 
