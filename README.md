@@ -18,7 +18,8 @@
 ### 2.NGINX
 - `nginx:1.18-alpine`
 
-#### Specs
+
+## Specs
 
 #### Ports
 - `nginx: 8888`
