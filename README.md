@@ -1,4 +1,5 @@
 # Docker Paas Development Environment
+#### A Quick, Easy, and Intuitive PaaS Solution to Build, Deploy, Manage, and Scale Your Apps.
 
 ## Host: http://localhost:8888
 
