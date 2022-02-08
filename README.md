@@ -30,7 +30,7 @@
 
 ## Setup
 
-1.  [generate a new repository from this template](https://github.com/superwpheroes/paas/generate)
+1.  [generate a new repository from this template](https://github.com/superwpheroes/docker-paas/generate)
 2.  `git clone https://github.com/you/your-repo.git <your-project>`
 3.  `cd <your-project>`
 4.  `git submodule update --init --recursive`
