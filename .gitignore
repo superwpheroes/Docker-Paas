@@ -10,3 +10,4 @@ src/wp-snapshots
 *.tar
 *.log
 .env
+
